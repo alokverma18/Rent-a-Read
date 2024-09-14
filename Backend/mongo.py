@@ -1,8 +1,10 @@
+from app.config import Config
 
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
-uri = ""
+# Load the MongoDB URI from the Config class
+uri = Config.MONGO_URI
 
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
