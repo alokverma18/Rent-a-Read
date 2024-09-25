@@ -1,24 +1,22 @@
 from werkzeug.security import generate_password_hash, check_password_hash
+from bson.objectid import ObjectId
 
 class User:
-    def __init__(self, username, email, password, role):
-        self.username = username
-        self.email = email
-        self.password_hash = generate_password_hash(password)
-        self.role = role
+    def __init__(self, db, user_data):
+        self.db = db
+        self.collection = self.db.users
+        self.data = user_data
 
-    @staticmethod
-    def find_by_email(db, email):
-        return db.users.find_one({'email': email})
+    def create(self):
+        self.data['password_hash'] = generate_password_hash(self.data['password'])
+        self.collection.insert_one(self.data)
 
-    def save_to_db(self, db):
-        db.users.insert_one({
-            'username': self.username,
-            'email': self.email,
-            'password_hash': self.password_hash,
-            'role': self.role
-        })
+    @classmethod
+    def find_by_email(cls, db, email):
+        return db.users.find_one({"email": email})
 
-    @staticmethod
-    def check_password(password, hashed_password):
-        return check_password_hash(hashed_password, password)
+    def check_password(self, password):
+        return check_password_hash(self.data['password_hash'], password)
+
+    def update(self, update_data):
+        self.collection.update_one({'_id': ObjectId(self.data['_id'])}, {'$set': update_data})

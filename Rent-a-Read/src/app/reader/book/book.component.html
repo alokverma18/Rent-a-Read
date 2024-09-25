@@ -1,0 +1,11 @@
+<div *ngIf="book" class="container">
+    <h2>{{ book.title }}</h2>
+    <img [src]="book.cover_image_url" alt="{{ book.title }}" />
+    <p><strong>Author:</strong> {{ book.author }}</p>
+    <p><strong>Description:</strong> {{ book.description }}</p>
+    <p><strong>Price:</strong> {{ book.price_per_hour | currency }}</p>
+    <p><strong>Published:</strong> {{ book.published_date | date }}</p>
+    <p><strong>Genres:</strong> {{ book.genres.join(', ') }}</p>
+    <button (click)="rentBook(book)">Rent</button>
+  </div>
+  

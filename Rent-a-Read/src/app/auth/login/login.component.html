@@ -1,0 +1,26 @@
+<h1>Login</h1>
+
+<form (submit)="login($event)">
+  <div>
+    <input type="text" name="email" placeholder="Email" [(ngModel)]="email" required />
+  </div>
+  <div>
+    <input
+      type="password"
+      name="password"
+      placeholder="Password"
+      [(ngModel)]="password"
+      required
+    />
+  </div>
+
+  <div>
+    <label for="role">Login as:</label>
+    <select name="role" [(ngModel)]="role" required>
+      <option value="reader">Reader</option>
+      <option value="owner">Owner</option>
+    </select>
+  </div>
+
+  <button>Login</button>
+</form>

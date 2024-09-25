@@ -1,0 +1,56 @@
+/* General Container Styles */
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fdfdfd; /* Light background for contrast */
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Title Styles */
+h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333; /* Dark text for readability */
+  margin-bottom: 10px;
+}
+
+/* Image Styles */
+img {
+  width: 100%; /* Responsive image */
+  max-height: 400px; /* Limit height */
+  object-fit: cover; /* Keep aspect ratio */
+  border-radius: 8px; /* Rounded corners */
+  margin-bottom: 15px;
+}
+
+/* Text Styles */
+p {
+  font-size: 1.2rem;
+  color: #555; /* Softer color for less contrast */
+  line-height: 1.6; /* Improve readability */
+  margin: 10px 0;
+}
+
+/* Button Styles */
+button {
+  background-color: #007bff; /* Bootstrap primary color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker shade for hover */
+}
+
+/* Genres Styles */
+strong {
+  font-weight: bold;
+  color: #333; /* Darker color for strong emphasis */
+}

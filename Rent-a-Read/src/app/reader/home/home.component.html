@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="filters">
+    <h2>Filters</h2>
+    <div class="filter-group">
+      <label for="title">Title:</label>
+      <input type="text" id="title" [(ngModel)]="filters.title" (input)="onFilterChange()" />
+    </div>
+    <div class="filter-group">
+      <label for="author">Author:</label>
+      <input type="text" id="author" [(ngModel)]="filters.author" (input)="onFilterChange()" />
+    </div>
+    <div class="filter-group">
+      <label for="genre">Genre:</label>
+      <select id="genre" [(ngModel)]="filters.genre" (change)="onFilterChange()">
+        <option value="">All Genres</option>
+        <option *ngFor="let genre of getUniqueGenres()" [value]="genre">{{ genre }}</option>
+      </select>
+    </div>
+    <div class="sort-options">
+      <label>Sort By:</label>
+      <select (change)="onSortByChange($event)">
+        <option value="title">Title</option>
+        <option value="price_per_hour">Price</option>
+      </select>
+      <label>Sort Order:</label>
+      <select (change)="onSortOrderChange($event)">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="books-grid">
+    <div class="book-card" *ngFor="let book of filteredBooks" (click)="openBook(book)">
+      <img [src]="book.cover_image_url" alt="{{ book.title }}" />
+      <h3>{{ book.title }}</h3>
+      <p><strong>Author:</strong> {{ book.author }}</p>
+      <p><strong>Price:</strong> ${{ book.price_per_hour }}/hour</p>
+      <button (click)="rentBook(book._id)">Rent</button>
+    </div>
+  </div>
+</div>
