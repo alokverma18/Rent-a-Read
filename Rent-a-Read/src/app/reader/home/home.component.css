@@ -2,12 +2,13 @@
     display: flex;
     justify-content: flex-start; 
     padding: 20px;
+    margin: 50px;
   }
   
   .filters {
-    flex: 1;
-    max-width: 300px;
-    margin-right: 20px;
+    /* flex: 1; */
+    width: 350px;
+    margin-right: 50px;
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 8px;
@@ -27,15 +28,16 @@
   
   input[type="text"],
   select {
-    width: 100%;
+    width: 95%;
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    margin-bottom: 10px;
   }
   
   .books-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); 
+    grid-template-columns: repeat(4, 1fr); 
     gap: 20px;
   }
   
@@ -50,8 +52,8 @@
   }
   
   .book-card img {
-    max-width: 100%;
-    height: auto;
+    width: 250px;
+    height: 250px;
     border-radius: 4px;
   }
   

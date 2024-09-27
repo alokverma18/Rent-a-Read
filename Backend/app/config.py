@@ -16,3 +16,7 @@ class Config:
     S3_BUCKET = os.getenv('S3_BUCKET')
     S3_KEY = os.getenv('S3_KEY')
     S3_SECRET = os.getenv('S3_SECRET')
+
+    # Razorpay Configuration
+    RAZORPAY_KEY = os.getenv('RAZORPAY_KEY')
+    RAZORPAY_SECRET = os.getenv('RAZORPAY_SECRET')

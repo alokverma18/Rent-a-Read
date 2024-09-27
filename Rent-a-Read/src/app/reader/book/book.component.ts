@@ -3,6 +3,7 @@ import { Book } from '../home/home.component';
 import { ActivatedRoute } from '@angular/router';
 import { BookService } from '../book.service';
 import { CommonModule } from '@angular/common';
+import { PaymentService } from '../payment.service';
 
 @Component({
   selector: 'app-book',
@@ -15,7 +16,11 @@ export class BookComponent implements OnInit {
   bookId: string | null = null;
   book: Book | null = null;
 
-  constructor(private route: ActivatedRoute, private bookService: BookService) {}
+  constructor(
+    private route: ActivatedRoute, 
+    private bookService: BookService,
+    private paymentService: PaymentService
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -33,7 +38,8 @@ export class BookComponent implements OnInit {
   }
 
   rentBook(book: any): void {
-    alert('Book rented successfully!');
+    this.paymentService.createTransaction(book.price_per_hour, book._id);
+    // alert('Book rented successfully!');
   }
 
 }

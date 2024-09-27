@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../auth/auth.service';
 import { OwnerService } from '../owner.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'owner-home',
@@ -14,7 +15,7 @@ export class OwnerHomeComponent implements OnInit {
   stats: any;
   recentRentals: any[] = [];
 
-  constructor(private ownerService: OwnerService) {}
+  constructor(private ownerService: OwnerService, private router: Router) {}
 
   ngOnInit() {
     this.loadStats();
@@ -32,4 +33,13 @@ export class OwnerHomeComponent implements OnInit {
       this.recentRentals = data;
     });
   }
+
+  navigateToBooks() {
+    this.router.navigate(['/owner/books']);
+  }
+
+  navigateToRentals() {
+    this.router.navigate(['/owner/rentals']);
+  }
+  
 }

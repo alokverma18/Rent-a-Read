@@ -13,7 +13,7 @@ class Book:
         self.cover_image_url = cover_image_url
         self.genres = genres if genres else []  # Ensure genres is a list
         self.availability = availability
-        self.created_at = datetime.utcnow()  # Automatically set the created_at field
+        self.created_at = datetime.now()  # Automatically set the created_at field
 
     def save_to_db(self, db):
         # Create a document to insert into the database

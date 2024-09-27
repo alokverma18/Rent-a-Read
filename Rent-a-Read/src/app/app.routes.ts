@@ -6,6 +6,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { BookComponent } from './reader/book/book.component';
+import { BooksComponent } from './owner/books/books.component';
+import { RentalsComponent } from './owner/rentals/rentals.component';
 
 export const routes: Routes = [
   {
@@ -42,6 +44,18 @@ export const routes: Routes = [
   { path: 'book/:id', 
     component: BookComponent 
   }, 
+
+  {
+    path: 'owner/books',
+    component: BooksComponent,
+    data: { role: 'owner' },
+  },
+
+  {
+    path: 'owner/rentals',
+    component: RentalsComponent,
+    data: { role: 'owner' },
+  }
 ];
 
 

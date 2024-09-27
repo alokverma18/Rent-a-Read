@@ -1,0 +1,30 @@
+<div class="container">
+    <h2>Your Books</h2>
+    <button (click)="openAddBookModal()">Add New Book</button>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of books">
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.price_per_hour | currency }}</td>
+          <td>
+            <button (click)="openEditBookModal(book)">Edit</button>
+            <button (click)="deleteBook(book._id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Modal for Add/Edit Book Form -->
+    <app-book-form *ngIf="isModalOpen" [book]="selectedBook" (close)="closeModal()"></app-book-form>
+  </div>
+  

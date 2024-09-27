@@ -1,0 +1,60 @@
+.container {
+    width: 80%; /* Adjust width as needed */
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  button {
+    background-color: #007bff; /* Primary color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 15px; /* Add spacing after button */
+  }
+  
+  button:hover {
+    background-color: #0056b3; /* Darken on hover */
+  }
+  
+  table {
+    width: 100%; /* Full width of container */
+    border-collapse: collapse; /* Remove border spacing */
+    font-family: Arial, sans-serif; /* Choose a nice font */
+  }
+  
+  th, td {
+    padding: 10px;
+    border: 1px solid #ddd; /* Light border */
+    text-align: left; /* Left-align content */
+  }
+  
+  th {
+    background-color: #f2f2f2; /* Header background color */
+    font-weight: bold;
+  }
+
+  td button {
+    background-color: #dc3545; /* Danger color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 5px; /* Add spacing around button */
+  }
+
+  td button:hover {
+    background-color: #c82333; /* Darken on hover */
+  }

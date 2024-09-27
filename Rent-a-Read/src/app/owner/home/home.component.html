@@ -16,7 +16,7 @@
   </div>
 
   <!-- Recent Rentals -->
-  <div class="recent-rentals">
+  <div class="recent-rentals"> <!-- *ngIf="recentRentals.length>0"-->
     <h3>Recent Rentals</h3>
     <table>
       <thead>
@@ -40,7 +40,7 @@
 
   <!-- Manage Books and Rentals Links -->
   <div class="actions">
-    <button routerLink="/owner/books">Manage Books</button>
-    <button routerLink="/owner/rentals">View Rentals</button>
+    <button (click)="navigateToBooks()">Manage Books</button>
+    <button (click)="navigateToRentals()">View Rentals</button>
   </div>
 </div>

@@ -21,7 +21,6 @@ def login():
     
     # Find user by email and role
     user_data = db.users.find_one({"email": email, "role": role})  
-    print(user_data)
 
     if user_data and User(db, user_data).check_password(password):
         # Create JWT tokens

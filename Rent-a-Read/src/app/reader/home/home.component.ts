@@ -98,7 +98,7 @@ export class HomeComponent implements OnInit {
 
   getUniqueGenres() {
     const allGenres = this.books.flatMap(book => book.genres);
-    return Array.from(new Set(allGenres)); // Return unique genres
+    return Array.from(new Set(allGenres)); 
   }
 
 
