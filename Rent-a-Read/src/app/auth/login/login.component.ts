@@ -38,14 +38,14 @@ export class LoginComponent {
       role: this.role,  // Include role
     })
       .subscribe((response: any) => {
-        alert('Login success!');
+        // alert('Login success!');
         if (this.role === 'reader') {
           this.router.navigate(['/reader']);
         } else if (this.role === 'owner') {
           this.router.navigate(['/owner']);
         }
       }, (error) => {
-        alert('Login failed!');
+        // alert('Login failed!');
         console.error(error);
       });
   }

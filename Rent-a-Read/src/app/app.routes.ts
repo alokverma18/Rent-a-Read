@@ -8,6 +8,8 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { BookComponent } from './reader/book/book.component';
 import { BooksComponent } from './owner/books/books.component';
 import { RentalsComponent } from './owner/rentals/rentals.component';
+import { ReaderRentalsComponent } from './reader/rentals/rentals.component';
+
 
 export const routes: Routes = [
   {
@@ -55,6 +57,12 @@ export const routes: Routes = [
     path: 'owner/rentals',
     component: RentalsComponent,
     data: { role: 'owner' },
+  },
+
+  {
+    path: 'reader/rentals',
+    component: ReaderRentalsComponent,
+    data: { role: 'reader' },
   }
 ];
 

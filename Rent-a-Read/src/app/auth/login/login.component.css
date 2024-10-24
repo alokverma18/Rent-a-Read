@@ -1,3 +1,6 @@
+h1 {
+  margin: auto;
+}
 form {
     display: flex;
     flex-direction: column;

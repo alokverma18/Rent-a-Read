@@ -37,9 +37,20 @@ export class BookComponent implements OnInit {
     });
   }
 
-  rentBook(book: any): void {
-    this.paymentService.createTransaction(book.price_per_hour, book._id);
-    // alert('Book rented successfully!');
+  async rentBook(book: any): Promise<void> {
+    try {
+      const result = await this.paymentService.createTransaction(book.price_per_hour, book._id);
+      
+      if (result.success) {
+        this.bookService.rentBook(result.order).subscribe(() => {
+          this.getBookDetails(book._id);
+        });
+        alert('Book rented successfully!');
+      }
+    } catch (error) {
+      console.error('Error during transaction:', error);
+      alert('Failed to rent book.');
+    }
   }
-
+  
 }

@@ -22,7 +22,7 @@ def create_order():
         'notes': notes
     })
 
-    print(order)
+    # print(order)
 
     return jsonify(order), 200
 

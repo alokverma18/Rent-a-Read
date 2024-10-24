@@ -27,46 +27,52 @@ export class PaymentService {
       bookId: ''
     };
 
-    public createTransaction(amount: Number, bookId: string) {
-      const data = {
-        amount: amount,
-        currency: 'INR',
-        notes: {
-          bookId: bookId
-        },
-        receipt: 'receipt#1'
-      };
-
-      const order: any = {};
-
-      this.http.post(`${this.apiUrl}/payment/create-order`, data).subscribe((order: any) => {
-        console.log('Order:', order);
+    public createTransaction(amount: Number, bookId: string): Promise<any> {
+      return new Promise((resolve, reject) => {
+        const data = {
+          amount: amount,
+          currency: 'INR',
+          notes: {
+            bookId: bookId
+          },
+          receipt: 'receipt#1'
+        };
     
-        var options = {
+        this.http.post(`${this.apiUrl}/payment/create-order`, data).subscribe((order: any) => {
+          console.log('Order:', order);
+      
+          var options = {
             "key": "rzp_test_AXBzvN2fkD4ESK", 
             "amount": order.amount,
             "currency": order.currency,
             "name": "Rent-a-Read",
             "description": "Book Rental Transaction",
             "image": "https://example.com/your_logo",
-            "order_id": order.id, 
+            "order_id": order.id,
             handler: (response: any) => {
-              if(response!= null && response.razorpay_payment_id != null) {
-                alert("Payment successful..")
+              if(response != null && response.razorpay_payment_id != null) {
+                // alert("Payment successful..");
                 this.processResponse(response, order.notes);
+                resolve({ success: true, order, response });
               } else {
-                alert("Payment failed..")
+                alert("Payment failed..");
+                reject({ success: false, message: "Payment failed" });
               }
             },
             "notes": order.notes,
             "theme": {
-                "color": "#3399cc"
+              "color": "#3399cc"
             }
-        };
-        var rzp1 = new Razorpay(options);
-        rzp1.open();
+          };
+          var rzp1 = new Razorpay(options);
+          rzp1.open();
+        }, (error) => {
+          console.error('Error creating order:', error);
+          reject(error);
+        });
       });
     }
+    
   
     processResponse(resp: any, notes: any) {
       this.orderDetails.transactionId = resp.razorpay_payment_id;

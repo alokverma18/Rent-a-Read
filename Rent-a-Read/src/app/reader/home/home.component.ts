@@ -106,4 +106,9 @@ export class HomeComponent implements OnInit {
     console.log('Opening book:', book);
     this.router.navigate(['/book', book._id]);
   }
+
+  openRentals() {
+    console.log('Opening rentals');
+    this.router.navigate(['reader/rentals']);
+  }
 }
