@@ -4,6 +4,7 @@
     <div class="navbar-buttons">
       <button *ngIf="!isAuthenticated()" (click)="goToLogin()">Login</button>
       <button *ngIf="!isAuthenticated()" (click)="goToRegister()">Register</button>
+      <button *ngIf="isAuthenticated() && isReader" (click)="goToRentals()" >My Rentals</button>
       <button *ngIf="isAuthenticated()" (click)="logout()">Logout</button>
     </div>
   </div>

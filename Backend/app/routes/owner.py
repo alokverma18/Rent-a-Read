@@ -15,11 +15,19 @@ def get_stats():
     owner_id = ObjectId(get_jwt_identity())
     db = current_app.db
     
-    total_books = db.books.count_documents({'owner_id': owner_id})
-    active_rentals = db.rentals.count_documents({'owner_id': owner_id, 'status': 'active'})
-
+    # Get the list of book IDs owned by the owner
+    owner_books = db.books.find({'owner_id': owner_id}, {'_id': 1})
+    book_ids = [book['_id'] for book in owner_books]
+    
+    # Total books owned by the owner
+    total_books = len(book_ids)
+    
+    # Count active rentals by checking if due_date is in the future
+    active_rentals = db.rentals.count_documents({'book_id': {'$in': book_ids}, 'due_date': {'$gt': datetime.now()}})
+    
+    # Calculate total earnings from those rentals
     total_earnings = list(db.rentals.aggregate([
-        {'$match': {'owner_id': owner_id}},
+        {'$match': {'book_id': {'$in': book_ids}}},
         {'$group': {'_id': None, 'total': {'$sum': '$rental_fee'}}}
     ]))
     
@@ -32,13 +40,44 @@ def get_stats():
     })
 
 
+
+
 @owner_bp.route('/recent-rentals', methods=['GET'])
 @jwt_required()
 def get_recent_rentals():
     owner_id = ObjectId(get_jwt_identity())
     db = current_app.db
-    rentals = db.rentals.find({'owner_id': owner_id}).sort('rented_date', -1).limit(10)
-    return jsonify(list(rentals))
+    
+    # Find books owned by the owner
+    owner_books = db.books.find({'owner_id': owner_id}, {'_id': 1})
+    book_ids = [book['_id'] for book in owner_books]
+    
+    # Find recent rentals for these books
+    rentals = db.rentals.find({'book_id': {'$in': book_ids}}).sort('rented_date', -1).limit(10)
+    
+    # Prepare the list of rentals to return
+    recent_rentals = []
+    
+    for rental in rentals:
+        # Find the book title
+        book = db.books.find_one({'_id': rental['book_id']}, {'title': 1})
+        book_title = book['title'] if book else 'Unknown'
+        
+        # Find the renter's name
+        renter = db.users.find_one({'_id': rental['renter_id']}, {'username': 1})
+        renter_name = renter['username'] if renter else 'Unknown'
+        
+        # Append the relevant data to the result
+        recent_rentals.append({
+            'book_title': book_title,
+            'renter': renter_name,
+            'rented_date': rental['rented_date'],
+            'due_date': rental['due_date']
+        })
+    
+    return jsonify(recent_rentals), 200
+
+
 
 
 @owner_bp.route('/books', methods=['GET'])
@@ -69,7 +108,6 @@ def get_books():
     
     return jsonify(books_list), 200
 
-
 @owner_bp.route('/book', methods=['POST'])
 @jwt_required()
 def add_book():
@@ -77,7 +115,7 @@ def add_book():
     file = request.files['file']  # Get the file from request
 
     # Upload the file to S3
-    s3_key = f"books/{file.filename}"
+    s3_key = f"books/{data.get('title')}"
     bucket_name = current_app.config['S3_BUCKET']
     
     s3.upload_fileobj(file, bucket_name, s3_key)
@@ -135,47 +173,55 @@ def update_book(book_id):
 def delete_book(book_id):
     owner_id = ObjectId(get_jwt_identity()) 
     db = current_app.db
+
+    book = db.books.find_one({'_id': ObjectId(book_id)}, {'title': 1})
+    book_title = book['title']
     
     db.books.delete_one({'_id': ObjectId(book_id), 'owner_id': owner_id})
+
+    s3_key = f"books/{book_title}"
+    bucket_name = current_app.config['S3_BUCKET']
+    
+    s3.delete_object(Bucket=bucket_name, Key=s3_key)
+    book_title = book_title.replace(" ", "_")
+    s3.delete_object(Bucket=bucket_name, Key=f"{book_title}.jpg")
     
     return jsonify({"message": "Book deleted successfully!"})
 
 @owner_bp.route('/rentals', methods=['GET'])
 @jwt_required()
 def get_rentals_by_owner():
-    db = current_app.db
     owner_id = ObjectId(get_jwt_identity())
-    rentals = list(db.rentals.aggregate([
-        {
-            "$lookup": {
-                "from": "books",
-                "localField": "book_id",
-                "foreignField": "_id",
-                "as": "book_info"
-            }
-        },
-        {
-            "$match": {
-                "book_info.owner_id": ObjectId(owner_id)
-            }
-        },
-        {
-            "$unwind": "$book_info"
-        },
-        {
-            "$lookup": {
-                "from": "users",
-                "localField": "renter_id",
-                "foreignField": "_id",
-                "as": "renter_info"
-            }
-        },
-        {
-            "$unwind": "$renter_info"
-        }
-    ]))
+    db = current_app.db
     
-    return jsonify(rentals), 200
+    # Find books owned by the owner
+    owner_books = db.books.find({'owner_id': owner_id}, {'_id': 1})
+    book_ids = [book['_id'] for book in owner_books]
+    
+    # Find recent rentals for these books
+    rentals = db.rentals.find({'book_id': {'$in': book_ids}}).sort('rented_date', -1)
+    
+    # Prepare the list of rentals to return
+    result = []
+    
+    for rental in rentals:
+        # Find the book title
+        book = db.books.find_one({'_id': rental['book_id']}, {'title': 1})
+        book_title = book['title'] if book else 'Unknown'
+        
+        # Find the renter's name
+        renter = db.users.find_one({'_id': rental['renter_id']}, {'username': 1})
+        renter_name = renter['username'] if renter else 'Unknown'
+        
+        # Append the relevant data to the result
+        result.append({
+            'book_title': book_title,
+            'renter': renter_name,
+            'rented_date': rental['rented_date'],
+            'due_date': rental['due_date']
+        })
+    
+    return jsonify(result), 200
 
 @owner_bp.route('/upload-cover-image', methods=['POST'])
 @jwt_required()

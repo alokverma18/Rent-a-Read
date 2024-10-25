@@ -30,7 +30,7 @@
       <tbody>
         <tr *ngFor="let rental of recentRentals">
           <td>{{ rental.book_title }}</td>
-          <td>{{ rental.renter_name }}</td>
+          <td>{{ rental.renter }}</td>
           <td>{{ rental.rented_date | date: 'mediumDate' }}</td>
           <td>{{ rental.due_date | date: 'mediumDate' }}</td>
         </tr>

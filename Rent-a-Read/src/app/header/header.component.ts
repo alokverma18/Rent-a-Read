@@ -15,23 +15,30 @@ export class HeaderComponent {
     private authService: AuthService
   ) {}
 
+  isReader : boolean = this.isAuthenticated() && this.authService.getUserRole() === 'reader';
+
   // Add logout or other functionality if needed
   isAuthenticated() {
     return this.authService.isLoggedIn();
   }
 
-    // Navigate to login page
-    goToLogin() {
-      this.router.navigate(['/login']);
-    }
   
-    // Navigate to register page
-    goToRegister() {
-      this.router.navigate(['/register']);
-    }
+   // Navigate to login page
+  goToLogin() {
+    this.router.navigate(['/login']);
+  }
+  
+  // Navigate to register page
+  goToRegister() {
+    this.router.navigate(['/register']);
+  }
 
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  goToRentals() {
+    this.router.navigate(['/reader/rentals']);
   }
 }
