@@ -8,17 +8,15 @@
           <th>Renter</th>
           <th>Rented Date</th>
           <th>Due Date</th>
-          <th>Status</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let rental of rentals">
-          <td>{{ rental.book_info.title }}</td>
-          <td>{{ rental.renter_info.username }}</td>
+          <td>{{ rental.book_title }}</td>
+          <td>{{ rental.renter }}</td>
           <td>{{ rental.rented_date | date }}</td>
           <td>{{ rental.due_date | date }}</td>
-          <td>{{ rental.status }}</td>
           <td>
             <button (click)="markAsReturned(rental._id)" [disabled]="rental.status === 'returned'">Mark as Returned</button>
             <button (click)="extendRental(rental._id)" [disabled]="rental.status === 'returned'">Extend Rental</button>

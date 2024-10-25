@@ -23,23 +23,26 @@ def rent_book():
 #     return jsonify(rentals), 200
 
 @rental_bp.route('/add', methods=['POST'])
+@jwt_required()
 def add_rental():
     data = request.json
     db = current_app.db
     renter_id = ObjectId(get_jwt_identity())
     print(data)
-    book = db.books.find_one({"_id": ObjectId(data.get('bookId'))})
+    book = db.books.find_one({"_id": ObjectId(data['bookId'])})
+    print(data['bookId'])
+    print(ObjectId(data['bookId']))
     print(book)
     if not book:
-        return jsonify({"error": "Book not found"}), 404
+        return jsonify({"error": "Book not found"}), 420
 
     rental_data = {
-        "book_id": ObjectId(data.get('bookId')),
+        "book_id": ObjectId(data['bookId']),
         "renter_id": renter_id,
         "rented_date": datetime.now(),
         "due_date": datetime.now() + timedelta(days=data.get('rental_duration', 1)), 
         "rental_fee": int(book['price_per_hour']) * (data.get('rental_duration', 1) * 24), 
-        "access_url": generate_presigned_url(data.get('bookId'), expiration=data.get('rental_duration', 1) * 24 * 3600),
+        "access_url": generate_presigned_url(book['title'], expiration=data.get('rental_duration', 1) * 24 * 3600),
         "transaction_id": data.get('transactionId', None),
     }
 
@@ -60,7 +63,8 @@ def get_rentals():
             status = 'false'
         else:
             status = 'active'
-        result.append({
+        if book:
+            result.append({
             "book_title": book['title'],
             "rented_date": rental['rented_date'],
             "due_date": rental['due_date'],

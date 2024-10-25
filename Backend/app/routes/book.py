@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request, current_app
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.models.book import Book
 from bson import ObjectId
 
@@ -14,7 +15,7 @@ def add_book():
         isbn=data['isbn'],
         published_date=data['published_date'],
         price_per_hour=data['price_per_hour'],
-        owner_id=data['owner_id'],
+        owner_id=ObjectId(get_jwt_identity()),
         description=data['description'],
         cover_image_url=data['cover_image_url'],
         genres=data.get('genres', []),  # Handle missing genres

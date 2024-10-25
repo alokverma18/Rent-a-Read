@@ -53,7 +53,8 @@ export class PaymentService {
               if(response != null && response.razorpay_payment_id != null) {
                 // alert("Payment successful..");
                 this.processResponse(response, order.notes);
-                resolve({ success: true, order, response });
+                const details = this.orderDetails
+                resolve({ success: true, details, response });
               } else {
                 alert("Payment failed..");
                 reject({ success: false, message: "Payment failed" });
@@ -81,7 +82,7 @@ export class PaymentService {
       this.orderDetails.bookId = notes.bookId;
       console.log('Order Details:', this.orderDetails);
 
-      this.router.navigate(['/reader']);
+      this.router.navigate(['/reader/rentals']);
       // this.placeOrder(orderForm);
     }
 
