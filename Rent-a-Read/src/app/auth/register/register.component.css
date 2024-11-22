@@ -1,74 +1,120 @@
-.register-container {
-  width: 35%; /* Adjust the width as needed */
-  margin: 50px auto; /* Center the container */
-  padding: 50px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+/* Full-Screen Centering Container */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  gap: 100px;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #333333;
+/* Title Styling */
+.title {
+  margin-bottom: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
 }
 
-.form-group {
-  display: flex; /* Make the form group a flex container */
-  align-items: center; /* Align items vertically */
-  justify-content: space-between; /* Space between label and input */
-  margin-bottom: 25px;
-}
-
-label {
-  flex: 0 0 auto; /* Set a fixed width for the label */
-  margin-right: 10px; /* Add spacing between label and input */
+.title h1 {
+  font-size: 60px;
+  color: #4CAF50;
   font-weight: bold;
-  font-size: 18px;
+  line-height: 1.3;
+}
+
+.title p {
+  font-size: 20px;
+  color: #4CAF50;
+}
+
+/* Register Form Container */
+.register-container {
+  max-width: 400px;
+  width: 100%;
+  padding: 30px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #e0e0e0, #f8f8f8);
+  box-shadow: 8px 8px 16px #c0c0c0, -8px -8px 16px #ffffff;
+  text-align: center;
+}
+
+/* Form Title */
+.register-container h1 {
+  font-size: 30px;
+  color: #4CAF50;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Form Group Styling */
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 14px;
   color: #555;
-  width: 100px; /* Adjust the width as needed */
+  margin-bottom: 10px;
+  display: block;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-  flex: 1 0 auto; /* Make the input field expand to fill the remaining space */
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 18px;
+/* Input Fields */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  width: calc(100% - 20px);
+  padding: 12px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: border 0.3s, box-shadow 0.3s;
 }
 
-input[type="radio"] {
-  margin-right: 5px;
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
 }
 
+/* Role Selection */
 .role-selection {
   display: flex;
-  justify-content:left;
+  align-items: center;
+  gap: 10px; /* Space between radio buttons and labels */
 }
 
-.error-message {
-  color: red;
-  margin-top: 10px;
+.role-selection label {
   font-size: 14px;
+  color: #555;
+  margin-right: 10px;
 }
 
-button {
-  width: 100%; /* Full width */
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
+.role-selection input[type="radio"] {
+  margin: 0 5px 0 0;
+}
+
+/* Submit Button */
+button[type="submit"] {
+  padding: 12px;
+  font-size: 16px;
+  color: #fff;
   border: none;
-  border-radius: 4px;
-  font-size: 20px;
+  border-radius: 8px;
+  background: linear-gradient(145deg, #4CAF50, #45a049);
   cursor: pointer;
+  transition: background 0.3s, transform 0.1s;
+  font-weight: bold;
+  width: 100%;
 }
 
-button:disabled {
-  background-color: #cccccc; /* Gray out button when disabled */
+button[type="submit"]:hover {
+  background: linear-gradient(145deg, #45a049, #4CAF50);
+  transform: scale(1.05);
 }
 
-button:hover:not(:disabled) {
-  background-color: #0056b3; /* Darken button on hover */
+button[type="submit"]:active {
+  transform: scale(1);
 }

@@ -16,12 +16,6 @@ def rent_book():
     rental.save_to_db(db)
     return jsonify({"message": "Book rented successfully!"}), 201
 
-# @rental_bp.route('/rentals', methods=['GET'])
-# def get_rentals():
-#     db = current_app.db
-#     rentals = Rental.get_all_rentals(db)
-#     return jsonify(rentals), 200
-
 @rental_bp.route('/add', methods=['POST'])
 @jwt_required()
 def add_rental():
@@ -45,9 +39,7 @@ def add_rental():
         "access_url": generate_presigned_url(book['title'], expiration=data.get('rental_duration', 1) * 24 * 3600),
         "transaction_id": data.get('transactionId', None),
     }
-
     db.rentals.insert_one(rental_data)
-
     return jsonify({"message": "Rental added successfully!"}), 201
 
 @rental_bp.route('', methods=['GET'])
