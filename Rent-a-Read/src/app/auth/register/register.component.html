@@ -1,6 +1,10 @@
-<div class="register-container">
+<div class="container">
+  <div class="title">
+    <h1>Rent-a-Read</h1>
+    <p>A Secure, Cloud-Powered eBook Rental System with Real-Time Access and Integrated Payments</p>
+  </div>
+  <div class="register-container">
     <h1>Register</h1>
-  
     <form (submit)="register($event)">
       <!-- Username Field -->
       <div class="form-group">
@@ -64,15 +68,10 @@
         <label for="owner">Owner</label>
       </div>
   
-      <!-- Error Message (if any) -->
-      <!-- <div *ngIf="errorMessage" class="error-message">
-        {{ errorMessage }}
-      </div> -->
-  
       <!-- Submit Button -->
       <button type="submit">
         Register
       </button>
     </form>
   </div>
-  
+</div>

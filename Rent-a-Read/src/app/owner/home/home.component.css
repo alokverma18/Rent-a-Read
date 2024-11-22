@@ -1,60 +1,92 @@
+/* Dashboard Container */
 .dashboard {
-    padding: 20px;
-  }
-  
-  .summary-cards {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .card {
-    flex: 1;
-    padding: 15px;
-    background-color: #f0f0f0;
-    border-radius: 8px;
-    text-align: center;
-  }
-  
-  .card h3 {
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-    color: #333;
-  }
-  
-  .card p {
-    font-size: 1.5rem;
-    color: #007bff;
-  }
-  
-  .recent-rentals {
-    margin-bottom: 20px;
-  }
-  
-  .recent-rentals table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .recent-rentals th,
-  .recent-rentals td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
-  }
-  
-  .actions {
-    display: flex;
-    gap: 15px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-  }
-  
+  padding: 30px; /* Increased padding for better spacing */
+  max-width: 1200px; /* Maximum width for the dashboard */
+  margin: 50px auto 0px; /* Center the dashboard */
+  background-color: #ffffff; /* White background for contrast */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+
+/* Summary Cards */
+.summary-cards {
+  display: flex; /* Use flexbox for horizontal layout */
+  gap: 20px; /* Space between cards */
+  margin-bottom: 30px; /* Space below summary cards */
+}
+
+.card {
+  flex: 1; /* Allow cards to take equal space */
+  padding: 20px; /* Padding inside cards */
+  background-color: #f8f9fa; /* Light background for cards */
+  border-radius: 8px; /* Rounded corners for cards */
+  text-align: center; /* Center text */
+  transition: transform 0.2s; /* Smooth scale effect on hover */
+}
+
+.card:hover {
+  transform: scale(1.02); /* Slightly enlarge card on hover */
+}
+
+.card h3 {
+  margin-bottom: 10px; /* Space below heading */
+  font-size: 1.5rem; /* Larger font size for headings */
+  color: #333; /* Dark text for headings */
+}
+
+.card p {
+  font-size: 2rem; /* Increased font size for values */
+  color: #007bff; /* Blue color for numbers */
+  font-weight: bold; /* Bold text for emphasis */
+}
+
+/* Recent Rentals */
+.recent-rentals {
+  margin-bottom: 30px; /* Space below recent rentals section */
+}
+
+.recent-rentals h3 {
+  margin-bottom: 10px; /* Space below the title */
+  font-size: 1.5rem; /* Font size for section title */
+  color: #333; /* Dark color for section title */
+}
+
+.recent-rentals table {
+  width: 100%; /* Full width table */
+  border-collapse: collapse; /* Remove space between borders */
+}
+
+.recent-rentals th,
+.recent-rentals td {
+  padding: 12px; /* Increased padding for table cells */
+  border: 1px solid #ddd; /* Light border for table */
+  text-align: left; /* Left-align text */
+}
+
+.recent-rentals th {
+  background-color: #f8f9fa; /* Light background for header */
+  color: #333; /* Dark text for header */
+}
+
+/* Actions Section */
+.actions {
+  display: flex; /* Use flexbox for horizontal layout */
+  gap: 15px; /* Space between buttons */
+}
+
+button {
+  padding: 12px 24px; /* Increased padding for buttons */
+  background-color: #007bff; /* Blue background */
+  color: #fff; /* White text */
+  border: none; /* No border */
+  border-radius: 6px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor */
+  font-size: 1.1rem; /* Slightly larger font size */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+}
+
+/* Button Hover Effects */
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarge button on hover */
+}

@@ -2,20 +2,22 @@ import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth/auth.service';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [CommonModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+  isReader$: Observable<boolean>;
   constructor(public router: Router,
-    private authService: AuthService
-  ) {}
-
-  isReader : boolean = this.isAuthenticated() && this.authService.getUserRole() === 'reader';
+    private authService: AuthService  
+  ) {
+    this.isReader$ = this.authService.userRole$.pipe(map(role => role === 'reader'));
+  }
 
   // Add logout or other functionality if needed
   isAuthenticated() {

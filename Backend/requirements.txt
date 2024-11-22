@@ -25,3 +25,4 @@ setuptools==75.1.0
 six==1.16.0
 urllib3==2.2.3
 Werkzeug==3.0.4
+Gunicorn=23.0.0

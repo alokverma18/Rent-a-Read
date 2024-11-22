@@ -30,7 +30,7 @@ export interface Book {
 export class HomeComponent implements OnInit {
   books: Book[] = [];
   filteredBooks: Book[] = [];
-  sortBy: keyof Book = 'title'; // Use keyof Book for type safety
+  sortBy: keyof Book = 'title'; 
   sortOrder: string = 'asc';
   filters: { title?: string; author?: string; genre?: string } = {
     title: '',
@@ -47,13 +47,13 @@ export class HomeComponent implements OnInit {
   loadBooks() {
     this.bookService.getBooks().subscribe((data: Book[]) => {
       this.books = data;
-      this.applyFilters(); // Initial filter application
+      this.applyFilters(); 
     });
   }
 
   onSortByChange(event: Event) {
     const selectElement = event.target as HTMLSelectElement;
-    this.sortBy = selectElement.value as keyof Book; // Type assertion
+    this.sortBy = selectElement.value as keyof Book; 
     this.sortBooks();
   }
 
@@ -64,13 +64,13 @@ export class HomeComponent implements OnInit {
   }
 
   onFilterChange() {
-    this.applyFilters(); // Apply filters whenever input changes
+    this.applyFilters(); 
   }
 
   sortBooks() {
     this.filteredBooks.sort((a, b) => {
-      const aValue = a[this.sortBy]; // Accessing dynamically
-      const bValue = b[this.sortBy]; // Accessing dynamically
+      const aValue = a[this.sortBy]; 
+      const bValue = b[this.sortBy]; 
 
       if (this.sortOrder === 'asc') {
         return aValue > bValue ? 1 : -1;
@@ -88,11 +88,10 @@ export class HomeComponent implements OnInit {
         (!this.filters.genre || book.genres.includes(this.filters.genre))
       );
     });
-    this.sortBooks(); // Re-sort after filtering
+    this.sortBooks(); 
   }
 
   rentBook(bookId: string) {
-    // Implement the rental logic here, e.g., call a service to rent the book
     console.log(`Renting book with ID: ${bookId}`);
   }
 
