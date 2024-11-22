@@ -1,4 +1,11 @@
 {
+    "builds": [
+      {
+        "src": "Rent-a-Read/package.json",
+        "use": "@vercel/node"
+      }
+    ],
+    "outputDirectory": "Rent-a-Read/dist/{project-name}",
     "rewrites": [
       {
         "source": "/(.*)",
