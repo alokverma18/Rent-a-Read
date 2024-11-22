@@ -13,7 +13,7 @@ export class AuthService {
   private userRoleSubject = new BehaviorSubject<string | null>(null);
   private router = inject(Router);
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:5000';
+  private apiUrl = 'https://rent-a-read.onrender.com/';
 
   constructor() {}
 

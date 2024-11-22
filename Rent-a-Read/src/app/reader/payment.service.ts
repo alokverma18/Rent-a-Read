@@ -12,7 +12,7 @@ declare var Razorpay: any;
 })
 export class PaymentService {
 
-    private apiUrl = 'http://localhost:5000';
+    private apiUrl = 'https://rent-a-read.onrender.com/';
 
     constructor(
       private http: HttpClient,
