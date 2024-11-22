@@ -5,7 +5,7 @@
         "use": "@vercel/node"
       }
     ],
-    "outputDirectory": "Rent-a-Read/dist/{project-name}",
+    "outputDirectory": "Rent-a-Read/dist/rent-a-read",
     "rewrites": [
       {
         "source": "/(.*)",
