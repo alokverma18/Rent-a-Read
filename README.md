@@ -2,7 +2,7 @@
 
 ## Description 📝
 
-Rent-a-Read is a secure, cloud-powered eBook rental system designed to make reading accessible and affordable for everyone. Built with Angular for a dynamic frontend, Flask for the backend, and MongoDB for robust data storage, the project enables users to rent eBooks with secure access via AWS S3. This project supports role-based functionalities for Readers and Book Owners, allowing seamless book rental and management.
+Rent-a-Read is a secure, cloud-powered eBook rental system designed to make reading accessible and affordable for everyone. Built with Angular for a dynamic frontend, Flask for the backend, and MongoDB for robust data storage, the project enables users to rent eBooks with secure access via AWS S3. This project supports role-based functionalities for Readers and Book Owners, allowing seamless book rental and management. 
 
 ## Tech Stack ⚙️
 
@@ -17,6 +17,7 @@ Rent-a-Read is a secure, cloud-powered eBook rental system designed to make read
 - **Deployment:**
   - Vercel (Frontend)
   - Render (Backend)
+  - Note: Website is too slow maybe due to Render deployment, better to run it locally to try
 
 ## Features ✨
 
