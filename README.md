@@ -49,15 +49,21 @@ Rent-a-Read is a secure, cloud-powered eBook rental system designed to make read
 ### Owner Home
 ![Owner Home](Snapshots/Owner.png)
 
-## Contributions 🤝
-
-All contributions are welcome! If you spot any issues, have suggestions, or want to add features, feel free to create a PR. Thanks for contributing to this project! 🚀
 
 ## Future Enhancements 🚀
 - **Profile Management**
 - **ProperRevenue Model**
 - **Mobile App**
 - **Personalised Recommendations**
+
+## Contributions 🤝
+
+All contributions are welcome! If you spot any issues, have suggestions, or want to add features, feel free to create a PR. Thanks for contributing to this project! 🚀
+
+
+## License
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-orange.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+
 
 ## Connect 
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://alokverma18.github.io/)
