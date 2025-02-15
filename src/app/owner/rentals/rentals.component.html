@@ -1,0 +1,28 @@
+<div class="rentals-container">
+    <h2>Manage Rentals</h2>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>Book Title</th>
+          <th>Renter</th>
+          <th>Rented Date</th>
+          <th>Due Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rental of rentals">
+          <td>{{ rental.book_title }}</td>
+          <td>{{ rental.renter }}</td>
+          <td>{{ rental.rented_date | date }}</td>
+          <td>{{ rental.due_date | date }}</td>
+          <td>
+            <button (click)="markAsReturned(rental._id)" [disabled]="rental.status === 'returned'">Mark as Returned</button>
+            <button (click)="extendRental(rental._id)" [disabled]="rental.status === 'returned'">Extend Rental</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -1,0 +1,75 @@
+/* Book Detail Container */
+.container {
+  display: flex; /* Use flexbox for horizontal layout */
+  align-items: flex-start; /* Align items at the start vertically */
+  padding: 30px; /* Padding for spacing */
+  max-width: 1200px; /* Maximum width for the container */
+  margin: 40px auto; /* Center the container on the page */
+  background-color: #ffffff; /* White background for contrast */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Image Styling */
+.book-image {
+  flex: 1; /* Allow the image to take up one part of the space */
+  max-height: 80vh; /* Maximum height for the image */
+  margin-right: 30px; /* Space between the image and content */
+  overflow: hidden; /* Hide overflow if the image exceeds its container */
+}
+
+.book-image img {
+  width: 100%; /* Responsive image */
+  height: 100%; /* Full height */
+  object-fit: cover; /* Cover to maintain aspect ratio */
+  border-radius: 8px; /* Slight rounding for images */
+}
+
+/* Content Styling */
+.book-content {
+  flex: 2; /* Allow the content to take up more space */
+}
+
+/* Title Styling */
+h2 {
+  font-size: 2.5em; /* Larger font size for the title */
+  color: #333; /* Dark color for text */
+  margin-bottom: 15px; /* Space below the title */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font family */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
+}
+
+/* Text Paragraph Styling */
+p {
+  font-size: 1.1em; /* Standard font size */
+  color: #555; /* Darker color for readability */
+  margin: 10px 0; /* Space above and below paragraphs */
+}
+
+/* Strong Text Styling */
+strong {
+  color: #333; /* Dark color for strong text */
+}
+
+/* Specific Class Styles */
+.author, .price, .published, .genres {
+  font-weight: bold; /* Bold text for specific classes */
+}
+
+/* Button Styling */
+button {
+  padding: 12px 20px; /* Padding for button */
+  font-size: 1.2em; /* Font size */
+  color: white; /* White text */
+  background-color: #28a745; /* Green background */
+  border: none; /* No border */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+}
+
+/* Button Hover Effect */
+button:hover {
+  background-color: #218838; /* Darker green on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}

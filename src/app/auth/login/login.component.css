@@ -1,0 +1,108 @@
+/* Full-Screen Centering Container */
+.container {
+  display: flex;
+  flex-direction: row; /* Changed to row to align title and form horizontally */
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  gap: 100px;
+}
+
+/* Title Styling */
+.title {
+  margin-bottom: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.title h1 {
+  font-size: 60px;
+  color: #4CAF50;
+  font-weight: bold;
+  line-height: 1.3;
+}
+
+.title p {
+  font-size: 20px;
+  color: #4CAF50;
+}
+
+.input-container h1 {
+  font-size: 30px;
+  color: #4CAF50;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+label {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* Form Styling */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  width: 100%;
+  padding: 30px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #e0e0e0, #f8f8f8);
+  box-shadow: 8px 8px 16px #c0c0c0, -8px -8px 16px #ffffff;
+}
+
+/* Input Fields and Select Styling */
+.input-container {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.input-container input,
+.input-container select {
+  width: calc(100% - 20px);
+  padding: 12px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.input-container input:focus,
+.input-container select:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
+}
+
+.role-label {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Button Styling */
+.login-button {
+  padding: 12px;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(145deg, #4CAF50, #45a049);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.1s;
+  font-weight: bold;
+}
+
+.login-button:hover {
+  background: linear-gradient(145deg, #45a049, #4CAF50);
+  transform: scale(1.05);
+}
+
+.login-button:active {
+  transform: scale(1);
+}
