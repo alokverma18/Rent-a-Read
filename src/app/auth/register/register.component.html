@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="title">
+    <h1>Rent-a-Read</h1>
+    <p>A Secure, Cloud-Powered eBook Rental System with Real-Time Access and Integrated Payments</p>
+  </div>
+  <div class="register-container">
+    <h1>Register</h1>
+    <form (submit)="register($event)">
+      <!-- Username Field -->
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          [(ngModel)]="username"
+          placeholder="Enter your username"
+          required
+        />
+      </div>
+  
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="email"
+          placeholder="Enter your email"
+          required
+        />
+      </div>
+  
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="password"
+          placeholder="Enter your password"
+          required
+        />
+      </div>
+  
+      <!-- Role Selection (Reader or Bookowner) -->
+      <div class="form-group role-selection">
+        <label for="role">Role</label><br />
+        <input
+          type="radio"
+          id="reader"
+          name="role"
+          value="reader"
+          [(ngModel)]="role"
+          required
+        />
+        <label for="reader">Reader</label>
+        <input
+          type="radio"
+          id="owner"
+          name="role"
+          value="owner"
+          [(ngModel)]="role"
+          required
+        />
+        <label for="owner">Owner</label>
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit">
+        Register
+      </button>
+    </form>
+  </div>
+</div>

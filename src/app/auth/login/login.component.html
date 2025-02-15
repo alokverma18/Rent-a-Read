@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="title">
+    <h1>Rent-a-Read</h1>
+    <p>A Secure, Cloud-Powered eBook Rental System with Real-Time Access and Integrated Payments</p>
+  </div>
+
+  <form class="login-form" (submit)="login($event)">
+    <div class="input-container">
+      <h1>Login</h1>
+      <label for="username">Username</label>
+      <input type="text" name="email" placeholder="Email" [(ngModel)]="email" required />
+    </div>
+    <div class="input-container">
+      <label for="password">Password</label>
+      <input type="password" name="password" placeholder="Password" [(ngModel)]="password" required />
+    </div>
+    <div class="input-container">
+      <label class="role-label" for="role">Login as:</label>
+      <select name="role" [(ngModel)]="role" required>
+        <option value="reader">Reader</option>
+        <option value="owner">Owner</option>
+      </select>
+    </div>
+    <button class="login-button">Login</button>
+  </form>
+</div>
