@@ -1,16 +1,14 @@
 {
-    "builds": [
-      {
-        "src": "Rent-a-Read/package.json",
-        "use": "@vercel/node"
+  "builds": [
+    {
+      "src": "angular.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
       }
-    ],
-    "outputDirectory": "Rent-a-Read/dist/rent-a-read",
-    "rewrites": [
-      {
-        "source": "/(.*)",
-        "destination": "/index.html"
-      }
-    ]
+    }
+  ],
+  "scripts": {
+    "build": "npx ng build --configuration production"
   }
-  
+}
