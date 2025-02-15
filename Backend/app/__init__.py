@@ -15,7 +15,7 @@ import boto3
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
-    CORS(app, origins=["http://localhost:4200", "https://rent-a-read.vercel.app"], supports_credentials=True)
+    CORS(app, origins=["http://localhost:4200", "https://rent-a-read.vercel.app", "https://rentaread.vercel.app"], supports_credentials=True)
 
     # Initialize JWT
     jwt = JWTManager(app)
