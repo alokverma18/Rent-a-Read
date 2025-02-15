@@ -1,14 +1,9 @@
 {
-  "builds": [
-    {
-      "src": "angular.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
+    "rewrites": [
+      {
+        "source": "/(.*)",
+        "destination": "/index.html"
       }
-    }
-  ],
-  "scripts": {
-    "build": "npx ng build --configuration production"
+    ]
   }
-}
+  
