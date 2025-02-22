@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BookService {
-  private apiUrl = 'http://127.0.0.1:5000/';  
+  private apiUrl = 'https://rent-a-read-0jps.onrender.com/';  
 
   constructor(private http: HttpClient) {}
 
