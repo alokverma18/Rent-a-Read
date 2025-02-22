@@ -40,11 +40,8 @@ export class BookComponent implements OnInit {
   async rentBook(book: any): Promise<void> {
     try {
       const result = await this.paymentService.createTransaction(book.price_per_hour, book._id);
-      console.log('Transaction result:', result);
-      
       if (result.success) {
         this.bookService.rentBook(result.details).subscribe((res) => {
-          console.log(res)
         });
         alert('Book rented successfully!');
       }

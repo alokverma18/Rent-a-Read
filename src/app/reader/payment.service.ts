@@ -39,7 +39,6 @@ export class PaymentService {
         };
     
         this.http.post(`${this.apiUrl}/payment/create-order`, data).subscribe((order: any) => {
-          console.log('Order:', order);
       
           var options = {
             "key": "rzp_test_AXBzvN2fkD4ESK", 
@@ -80,7 +79,6 @@ export class PaymentService {
       this.orderDetails.orderStatus = 'SUCCESS';
       this.orderDetails.orderDate = new Date();
       this.orderDetails.bookId = notes.bookId;
-      console.log('Order Details:', this.orderDetails);
 
       this.router.navigate(['/reader/rentals']);
       // this.placeOrder(orderForm);

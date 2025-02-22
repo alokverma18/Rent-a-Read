@@ -15,13 +15,11 @@ export class GoogleAuthCallbackComponent implements OnInit {
       const accessToken = params['access_token'];
       const refreshToken = params['refresh_token'];
       const role = params['role'];
-
-      console.log(accessToken, refreshToken, role);
       if (accessToken) {
         this.authService.googleLogin(JSON.stringify({ access_token: accessToken, refresh_token: refreshToken, role: role }));
-        this.router.navigate(['/reader']); // Redirect to dashboard after login
+        this.router.navigate(['/reader']);
       } else {
-        this.router.navigate(['/login']); // Redirect back to login if failed
+        this.router.navigate(['/login']);
       }
     });
   }

@@ -21,7 +21,7 @@ export class RegisterComponent {
 
   register(event: Event) {
     event.preventDefault();
-    console.log(`Register: ${this.email}, ${this.username}, ${this.password}, ${this.role}`);
+  
     this.authService
       .register({
         email: this.email,

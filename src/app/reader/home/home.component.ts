@@ -114,7 +114,6 @@ export class HomeComponent implements OnInit {
   }
 
   rentBook(bookId: string) {
-    console.log(`Renting book with ID: ${bookId}`);
   }
 
   getUniqueGenres() {
@@ -123,7 +122,6 @@ export class HomeComponent implements OnInit {
   }
 
   openBook(book: Book) {
-    console.log('Opening book:', book);
     this.router.navigate(['/book', book._id]);
   }
 
@@ -170,7 +168,6 @@ export class HomeComponent implements OnInit {
   
     this.speechService.convertSpeechToText(formData).subscribe(
       (response) => {
-        console.log('Response:', response);
         if (response.text) {
           this.filters.search.set(response.text);
           console.log(response.text);

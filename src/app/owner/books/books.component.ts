@@ -25,7 +25,6 @@ export class BooksComponent implements OnInit {
   loadBooks() {
     this.ownerService.getBooks().subscribe(data => {
       this.books = data;
-      console.log('Books:', this.books);
     });
   }
 

@@ -31,7 +31,6 @@ export class AuthService {
   }
 
   private doLoginUser(email: string, token: any) {
-    console.log(token)
     this.storeJwtToken(token);
     this.isAuthenticatedSubject.next(true);
     this.updateUserRole();
