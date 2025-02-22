@@ -1,3 +1,9 @@
+<div class="search-bar-container">
+  <input type="text" [value]="filters.search()" (input)="onSearchChange($event)" placeholder="Search books...">
+  <button class="mic-btn" (click)="startRecording()" *ngIf="!isRecording">🎙️</button>
+  <button class="mic-btn stop" (click)="stopRecording()" *ngIf="isRecording">⏹️</button>
+</div>
+
 <div class="container">
   <div class="filters">
     <h2>Filters</h2>
@@ -16,7 +22,7 @@
         <option *ngFor="let genre of getUniqueGenres()" [value]="genre">{{ genre }}</option>
       </select>
     </div>
-    <div class="sort-options">
+    <div class="filter-group">
       <label>Sort By:</label>
       <select (change)="onSortByChange($event)">
         <option value="title">Title</option>
@@ -30,13 +36,33 @@
     </div>
   </div>
 
-  <div class="books-grid">
-    <div class="book-card" *ngFor="let book of filteredBooks" (click)="openBook(book)">
-      <img [src]="book.cover_image_url" alt="{{ book.title }}" />
-      <h3>{{ book.title }}</h3>
-      <p><strong>Author:</strong> {{ book.author }}</p>
-      <p><strong>Price:</strong> ${{ book.price_per_hour }}/hour</p>
-      <button (click)="rentBook(book._id)">Rent</button>
+  <div class="main-content">
+    @if(recommendedBooks.length!=0){
+      <!-- Recommendations Section -->
+    <div class="recommendations">
+      <h2>Recommended Books</h2>
+      <div class="books-grid">
+        <div class="book-card" *ngFor="let book of recommendedBooks" (click)="openBook(book)">
+          <img [src]="book.cover_image_url" alt="{{ book.title }}" />
+          <h3>{{ book.title }}</h3>
+        </div>
+      </div>
+    </div>
+    } @else {
+      <h2>No Recommendations Available!</h2>
+    }
+    
+
+    <h2>Browse All Books</h2>
+    <!-- Books Grid -->
+    <div class="books-grid">
+      <div class="book-card" *ngFor="let book of filteredBooks" (click)="openBook(book)">
+        <img [src]="book.cover_image_url" alt="{{ book.title }}" />
+        <h3>{{ book.title }}</h3>
+        <p><strong>Author:</strong> {{ book.author }}</p>
+        <p><strong>Price:</strong> ${{ book.price_per_hour }}/hour</p>
+        <button (click)="rentBook(book._id)">Rent</button>
+      </div>
     </div>
   </div>
 </div>

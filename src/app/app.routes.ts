@@ -10,6 +10,7 @@ import { BooksComponent } from './owner/books/books.component';
 import { RentalsComponent } from './owner/rentals/rentals.component';
 import { ReaderRentalsComponent } from './reader/rentals/rentals.component';
 import { StreamComponent } from './reader/stream/stream.component';
+import { GoogleAuthCallbackComponent } from './auth/google-auth-callback.component';
 
 
 export const routes: Routes = [
@@ -37,6 +38,10 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  { 
+    path: 'auth-callback', 
+    component: GoogleAuthCallbackComponent 
   },
 
   {

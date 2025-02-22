@@ -12,11 +12,11 @@ import { map, Observable } from 'rxjs';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  isReader$: Observable<boolean>;
+  isReader: boolean = false;
   constructor(public router: Router,
     private authService: AuthService  
   ) {
-    this.isReader$ = this.authService.userRole$.pipe(map(role => role === 'reader'));
+    this.isReader = this.authService.getUserRole() === 'reader';
   }
 
   // Add logout or other functionality if needed

@@ -3,19 +3,24 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from pymongo import MongoClient
 from app.config import Config
-from app.routes.auth import auth_bp
+from app.routes.auth import auth_bp, oauth
 from app.routes.users import users_bp
 from app.routes.book import book_bp
 from app.routes.rental import rental_bp
 from app.routes.test import test_bp 
 from app.routes.owner import owner_bp
 from app.routes.payment import payment_bp
+from app.routes.speech import speech_bp
+from app.routes.recommendations import recommend_bp
+
 import boto3
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
     CORS(app, origins=["http://localhost:4200", "https://rent-a-read.vercel.app", "https://rentaread.vercel.app"], supports_credentials=True)
+
+    oauth.init_app(app)
 
     # Initialize JWT
     jwt = JWTManager(app)
@@ -39,4 +44,7 @@ def create_app():
     app.register_blueprint(users_bp, url_prefix="/users")
     app.register_blueprint(owner_bp, url_prefix="/owner")
     app.register_blueprint(payment_bp, url_prefix="/payment")
+    app.register_blueprint(speech_bp, url_prefix="/speech")
+    app.register_blueprint(recommend_bp, url_prefix="/recommend")
+
     return app
