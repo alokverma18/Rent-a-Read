@@ -84,7 +84,7 @@ def authorize_google():
     access_token = create_access_token(identity=str(user_id), additional_claims={"role": "reader"})
     refresh_token = create_refresh_token(identity=str(user_id))
 
-    frontend_url = f"http://localhost:4200/auth-callback?access_token={access_token}&refresh_token={refresh_token}&role=reader"
+    frontend_url = f"https://rentaread.vercel.app/auth-callback?access_token={access_token}&refresh_token={refresh_token}&role=reader"
     return redirect(frontend_url)
 
     # return jsonify({
