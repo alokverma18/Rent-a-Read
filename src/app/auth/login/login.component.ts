@@ -53,7 +53,7 @@ export class LoginComponent {
   }
 
   googleLogin() {
-    window.location.href = 'http://127.0.0.1:5000/auth/login/google';
+    window.location.href = 'https://rent-a-read-0jps.onrender.com/auth/login/google';
   }
   // googleLogin() {
 

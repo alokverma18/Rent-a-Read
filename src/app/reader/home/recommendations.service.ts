@@ -11,7 +11,7 @@ export class RecommendationsService {
     private http: HttpClient
   ) { }
 
-  private apiUrl = 'http://127.0.0.1:5000/recommend/';
+  private apiUrl = 'https://rent-a-read-0jps.onrender.com/recommend/';
 
   fetchRecommendations(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
