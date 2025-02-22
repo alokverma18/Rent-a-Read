@@ -42,7 +42,6 @@ export class BookFormComponent implements OnInit {
     const file = event.target.files[0];
     if (file) {
       this.uploading = true;
-      console.log('Uploading cover image:', file);
 
       this.ownerService.uploadCoverImage(file).subscribe(
         (response: any) => {
@@ -88,9 +87,6 @@ export class BookFormComponent implements OnInit {
     if (this.book) {
 
       formData.set('published_date', new Date(bookPayload.published_date).toDateString());
-
-      console.log('Updating book:', this.book._id);
-      formData.forEach((value, key) => console.log(key, value));
       this.ownerService.updateBook(this.book._id, formData).subscribe(() => {
         this.closeForm();
       });
