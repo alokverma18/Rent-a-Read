@@ -1,1 +1,25 @@
-<p>stream works!</p>
+<div class="container">
+
+    <!-- Audio Controls Sidebar -->
+    <div class="audio-controls">
+      <button (click)="startReading()" [disabled]="isReading" class="sidebar-btn">
+        &nbsp;▶<span class="btn-label"> Play</span>
+      </button>
+      <button (click)="pauseReading()" [disabled]="!isReading" class="sidebar-btn">
+        &nbsp;⏸<span class="btn-label"> Pause</span>
+      </button>
+      <button (click)="resumeReading()" [disabled]="!isReading" class="sidebar-btn">
+        &nbsp;⏯<span class="btn-label"> Resume</span>
+      </button>
+      <button (click)="stopReading()" [disabled]="!isReading" class="sidebar-btn">
+        &nbsp;⏹<span class="btn-label"> Stop</span>
+      </button>
+    </div>
+  
+    <!-- Book Viewer Section -->
+    <div class="book-viewer">
+      <iframe [src]="safeSignedUrl" width="100%" height="100%"></iframe>
+    </div>
+  
+  </div>
+  

@@ -1,7 +1,9 @@
 from datetime import datetime, timedelta
+import fitz
 from flask import Blueprint, jsonify, request, current_app
 from flask_cors import cross_origin
 from flask_jwt_extended import jwt_required, get_jwt_identity
+import requests
 from app.models.rental import Rental
 from app.services.s3 import generate_presigned_url
 from bson import ObjectId
@@ -64,3 +66,25 @@ def get_rentals():
             "access_status": status
         })
     return jsonify(result)
+
+# route to extract text from url
+@rental_bp.route('/extract', methods=['POST'])
+@jwt_required()
+def extract_text():
+    data = request.json
+    pdf_url = data.get('url')
+    
+    if not pdf_url:
+        return jsonify({'error': 'PDF URL is required'}), 400
+    
+    response = requests.get(pdf_url)
+    if response.status_code != 200:
+        return jsonify({'error': 'Failed to fetch PDF'}), 500
+
+    with open('temp.pdf', 'wb') as f:
+        f.write(response.content)
+
+    doc = fitz.open('temp.pdf')
+    text = ''.join(page.get_text() for page in doc)
+    
+    return jsonify({'text': text})

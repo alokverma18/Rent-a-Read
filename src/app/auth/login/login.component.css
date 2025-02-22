@@ -106,3 +106,24 @@ label {
 .login-button:active {
   transform: scale(1);
 }
+
+.google-login {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  font-size: 16px;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.1s;
+  font-weight: bold;
+}
+
+.google-login:hover {
+  background: #f9f9f9;
+  transform: scale(1.05);
+}
