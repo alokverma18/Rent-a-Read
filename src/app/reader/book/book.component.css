@@ -1,75 +1,94 @@
 /* Book Detail Container */
 .container {
-  display: flex; /* Use flexbox for horizontal layout */
-  align-items: flex-start; /* Align items at the start vertically */
-  padding: 30px; /* Padding for spacing */
-  max-width: 1200px; /* Maximum width for the container */
-  margin: 40px auto; /* Center the container on the page */
-  background-color: #ffffff; /* White background for contrast */
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  display: flex;
+  flex-direction: row; /* Default: side-by-side */
+  align-items: flex-start;
+  padding: 30px;
+  max-width: 1200px;
+  margin: 40px auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  gap: 20px; /* Space between image and content */
 }
 
 /* Image Styling */
 .book-image {
-  flex: 1; /* Allow the image to take up one part of the space */
-  max-height: 80vh; /* Maximum height for the image */
-  margin-right: 30px; /* Space between the image and content */
-  overflow: hidden; /* Hide overflow if the image exceeds its container */
+  flex: 1;
+  max-height: 80vh;
+  overflow: hidden;
 }
 
 .book-image img {
-  width: 100%; /* Responsive image */
-  height: 100%; /* Full height */
-  object-fit: cover; /* Cover to maintain aspect ratio */
-  border-radius: 8px; /* Slight rounding for images */
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 /* Content Styling */
 .book-content {
-  flex: 2; /* Allow the content to take up more space */
+  flex: 2;
 }
 
 /* Title Styling */
 h2 {
-  font-size: 2.5em; /* Larger font size for the title */
-  color: #333; /* Dark color for text */
-  margin-bottom: 15px; /* Space below the title */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font family */
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
+  font-size: 2.5em;
+  color: #333;
+  margin: 0 auto 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Text Paragraph Styling */
 p {
-  font-size: 1.1em; /* Standard font size */
-  color: #555; /* Darker color for readability */
-  margin: 10px 0; /* Space above and below paragraphs */
-}
-
-/* Strong Text Styling */
-strong {
-  color: #333; /* Dark color for strong text */
-}
-
-/* Specific Class Styles */
-.author, .price, .published, .genres {
-  font-weight: bold; /* Bold text for specific classes */
+  font-size: 1.1em;
+  color: #555;
+  margin: 10px 0;
 }
 
 /* Button Styling */
 button {
-  padding: 12px 20px; /* Padding for button */
-  font-size: 1.2em; /* Font size */
-  color: white; /* White text */
-  background-color: #28a745; /* Green background */
-  border: none; /* No border */
-  border-radius: 8px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+  padding: 12px 20px;
+  font-size: 1.2em;
+  color: white;
+  background-color: #ff6400;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 /* Button Hover Effect */
 button:hover {
-  background-color: #218838; /* Darker green on hover */
-  transform: scale(1.05); /* Slightly enlarge on hover */
+  background-color: #ff4000;
+  transform: scale(1.05);
+}
+
+/* --- Responsive Design for Mobile --- */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center align content */
+    padding: 20px;
+  }
+
+  .book-content {
+    text-align: center; /* Center align text */
+  }
+
+  h2 {
+    font-size: 2em;
+  }
+
+  p {
+    font-size: 1em;
+  }
+  .description, .price, .published, .genres {
+    text-align: left;
+  }
+
+  button {
+    width: 100%; /* Make button full width */
+  }
 }

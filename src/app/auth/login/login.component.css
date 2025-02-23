@@ -6,6 +6,7 @@
   align-items: center;
   min-height: 90vh;
   gap: 100px;
+  padding: 20px;
 }
 
 /* Title Styling */
@@ -17,19 +18,19 @@
 
 .title h1 {
   font-size: 60px;
-  color: #4CAF50;
+  color: #ff6400;
   font-weight: bold;
   line-height: 1.3;
 }
 
 .title p {
   font-size: 20px;
-  color: #4CAF50;
+  color: #ff6400;
 }
 
 .input-container h1 {
   font-size: 30px;
-  color: #4CAF50;
+  color: #ff6400;
   font-weight: bold;
   margin-bottom: 20px;
   text-align: center;
@@ -38,7 +39,7 @@
 label {
   font-size: 14px;
   color: #555;
-  margin-bottom: 10px;
+  margin: 0 5px 10px;
   display: block;
 }
 
@@ -74,7 +75,7 @@ label {
 
 .input-container input:focus,
 .input-container select:focus {
-  border-color: #4CAF50;
+  border-color: #ff6400;
   box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
 }
 
@@ -92,14 +93,14 @@ label {
   color: #fff;
   border: none;
   border-radius: 8px;
-  background: linear-gradient(145deg, #4CAF50, #45a049);
+  background: linear-gradient(145deg, #ff6400, #ff4000);
   cursor: pointer;
   transition: background 0.3s, transform 0.1s;
   font-weight: bold;
 }
 
 .login-button:hover {
-  background: linear-gradient(145deg, #45a049, #4CAF50);
+  background: linear-gradient(145deg, #ff4000, #ff6400);
   transform: scale(1.05);
 }
 
@@ -126,4 +127,35 @@ label {
 .google-login:hover {
   background: #f9f9f9;
   transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .title {
+    display: none;
+  }
+
+  .container {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-form {
+    padding: 20px;
+    width: 90%;
+  }
+
+  .login-button,
+  .google-login {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .input-container input,
+  .input-container select {
+    font-size: 14px;
+    padding: 10px;
+  }
 }
