@@ -1,27 +1,74 @@
-# RentARead
+# Rent-a-Read 📚
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
+## Description 📝
 
-## Development server
+Rent-a-Read is a secure, cloud-powered eBook rental system designed to make reading accessible and affordable for everyone. Built with Angular for a dynamic frontend, Flask for the backend, and MongoDB for robust data storage, the project enables users to rent eBooks with secure access via AWS S3. This project supports role-based functionalities for Readers and Book Owners, allowing seamless book rental and management. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Tech Stack ⚙️
 
-## Code scaffolding
+- **Frontend:**
+  - Angular
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Backend:**
+  - Flask (Python)
+  - MongoDB
+  - AWS S3 (for content storage and streaming)
 
-## Build
+- **Deployment:**
+  - Vercel (Frontend)
+  - Render (Backend)
+  - Note: Website is too slow maybe due to Render deployment, better to run it locally to try
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Features ✨
 
-## Running unit tests
+### Reader Features:
+- **Browse and Search Books:**
+- **Rent eBooks:**
+- **View and Access Rentals:**
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Owner Features:
+- **Dashboard:**
+- **Book Management:**
+- **Rental Management:**
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Authentication:
+- Role-based authentication for Readers and Book Owners using JWT tokens.
 
-## Further help
+### Secure Access:
+- Signed URLs for secure and time-bound eBook access.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Snapshots 🖼️
+
+### Login
+![Login](Snapshots/Login.png)
+
+### Reader Home
+![Reader Home](Snapshots/Reader.png)
+
+### Owner Home
+![Owner Home](Snapshots/Owner.png)
+
+
+## Future Enhancements 🚀
+- **Profile Management**
+- **ProperRevenue Model**
+- **Mobile App**
+- **Personalised Recommendations**
+
+## Contributions 🤝
+
+All contributions are welcome! If you spot any issues, have suggestions, or want to add features, feel free to create a PR. Thanks for contributing to this project! 🚀
+
+
+## License
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-orange.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+
+
+## Connect 
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://alokverma18.github.io/)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/alokverma18/)
+[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/ak_verma18)
+
+### Leave a 🌟 if you like it!
+### Happy Reading! 📖
