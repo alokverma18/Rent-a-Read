@@ -1,92 +1,136 @@
 /* Dashboard Container */
 .dashboard {
-  padding: 30px; /* Increased padding for better spacing */
-  max-width: 1200px; /* Maximum width for the dashboard */
-  margin: 50px auto 0px; /* Center the dashboard */
-  background-color: #ffffff; /* White background for contrast */
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  padding: 30px;
+  max-width: 1200px;
+  margin: 20px auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Summary Cards */
 .summary-cards {
-  display: flex; /* Use flexbox for horizontal layout */
-  gap: 20px; /* Space between cards */
-  margin-bottom: 30px; /* Space below summary cards */
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  justify-content: center; /* Centers cards */
 }
 
 .card {
-  flex: 1; /* Allow cards to take equal space */
-  padding: 20px; /* Padding inside cards */
-  background-color: #f8f9fa; /* Light background for cards */
-  border-radius: 8px; /* Rounded corners for cards */
-  text-align: center; /* Center text */
-  transition: transform 0.2s; /* Smooth scale effect on hover */
+  flex: 1;
+  min-width: 200px;
+  max-width: 350px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.2s;
 }
 
 .card:hover {
-  transform: scale(1.02); /* Slightly enlarge card on hover */
+  transform: scale(1.02);
 }
 
 .card h3 {
-  margin-bottom: 10px; /* Space below heading */
-  font-size: 1.5rem; /* Larger font size for headings */
-  color: #333; /* Dark text for headings */
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  color: #333;
 }
 
 .card p {
-  font-size: 2rem; /* Increased font size for values */
-  color: #007bff; /* Blue color for numbers */
-  font-weight: bold; /* Bold text for emphasis */
+  font-size: 2rem;
+  color: #007bff;
+  font-weight: bold;
 }
 
 /* Recent Rentals */
 .recent-rentals {
-  margin-bottom: 30px; /* Space below recent rentals section */
+  margin-bottom: 30px;
+  text-align: center; /* Centers heading */
 }
 
-.recent-rentals h3 {
-  margin-bottom: 10px; /* Space below the title */
-  font-size: 1.5rem; /* Font size for section title */
-  color: #333; /* Dark color for section title */
-}
-
+/* Responsive Table - Centering Fix */
 .recent-rentals table {
-  width: 100%; /* Full width table */
-  border-collapse: collapse; /* Remove space between borders */
+  width: 90%; /* Adjust width */
+  border-collapse: collapse;
+  margin: 0 auto; /* Center table */
+  overflow-x: auto;
 }
 
 .recent-rentals th,
 .recent-rentals td {
-  padding: 12px; /* Increased padding for table cells */
-  border: 1px solid #ddd; /* Light border for table */
-  text-align: left; /* Left-align text */
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+  white-space: nowrap;
 }
 
 .recent-rentals th {
-  background-color: #f8f9fa; /* Light background for header */
-  color: #333; /* Dark text for header */
+  background-color: #f8f9fa;
+  color: #333;
 }
 
 /* Actions Section */
 .actions {
-  display: flex; /* Use flexbox for horizontal layout */
-  gap: 15px; /* Space between buttons */
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 button {
-  padding: 12px 24px; /* Increased padding for buttons */
-  background-color: #007bff; /* Blue background */
-  color: #fff; /* White text */
-  border: none; /* No border */
-  border-radius: 6px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor */
-  font-size: 1.1rem; /* Slightly larger font size */
-  transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+  padding: 12px 24px;
+  background-color: #ff6400;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 /* Button Hover Effects */
 button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
-  transform: scale(1.05); /* Slightly enlarge button on hover */
+  background-color: #ff4000;
+  transform: scale(1.05);
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .summary-cards {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .recent-rentals table {
+    overflow-x: auto;
+  }
+
+  .actions {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  button {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 576px) {
+  .recent-rentals {
+    overflow-x: auto;
+  }
+  .recent-rentals td {
+    padding: 10px;
+    font-size: x-small;
+  }
 }

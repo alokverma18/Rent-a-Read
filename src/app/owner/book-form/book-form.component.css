@@ -1,91 +1,117 @@
 .modal {
-    display: flex; /* Center the modal horizontally */
-    justify-content: center;
-    align-items: center;
-    position: fixed; /* Make the modal fixed on the screen */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay */
-    z-index: 10; /* Ensure modal appears above other elements */
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  overflow-y: auto; /* Ensure scrolling on small screens */
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 600px;
+  max-height: 90vh; /* Prevent content from overflowing */
+  overflow-y: auto; /* Enable scrolling within modal */
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  display: inline-block;
+  width: 30%;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #555;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-bottom: 15px;
+  width: 60%;
+}
+
+textarea {
+  min-height: 100px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.actions button {
+  background-color: #ff6400;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.actions button:hover {
+  background-color: #ff4000;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
   .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    width: 80%; /* Set modal width */
-    max-width: 600px; /* Limit modal width */
-    margin: auto; /* Center the content within the modal */
+      width: 80%;
+      max-height: 80vh;
   }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
+
   form {
-    display: flex; /* Arrange form elements vertically */
-    flex-direction: column;
+      flex-direction: column;
   }
-  
+
   label {
-    display:inline-block;
-    width: 30%;
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: #555;
+      width: 100%;
   }
-  
+
   input[type="text"],
-  input[type="number"] {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    margin-bottom: 15px;
-    /* Set width to 100% to fill the left place */
-    width: 60%;
-    
+  input[type="number"],
+  input[type="date"],
+  textarea,
+  select {
+      width: 90%; /* Make inputs full width */
+      font-size: 12px;
   }
-  
-  textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    min-height: 100px; /* Set minimum height for textarea */
-    margin-bottom: 15px;
-    width: 60%;
+  input[type="file"] {
+      margin-bottom: 10px;
   }
-  
+
   .actions {
-    display: flex;
-    justify-content: space-between; /* Space between buttons */
+      flex-direction: column;
+      gap: 10px;
   }
-  
+
   .actions button {
-    background-color: #007bff; /* Primary color */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin: 0 5px; /* Add spacing between buttons */
+      width: 100%;
   }
-  
-  .actions button:hover {
-    background-color: #0056b3; /* Darken on hover */
-  }
-  
-  .actions button[type="submit"] {
-    background-color: #28a745; /* Green for submit */
-  }
-  
-  .actions button[type="submit"]:hover {
-    background-color: #218c3f; /* Darker green on hover */
-  }
+}

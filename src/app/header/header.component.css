@@ -1,6 +1,6 @@
 /* Navbar Styling */
 .navbar {
-  background-color: #4CAF50; /* Navbar background color */
+  background-color: #ff6400; /* Navbar background color */
   padding: 15px 20px; /* Spacing around the navbar */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
@@ -31,7 +31,7 @@
   padding: 10px 15px; /* Padding for buttons */
   font-size: 16px; /* Button font size */
   color: white; /* Button text color */
-  background-color: #45a049; /* Button background color */
+  background-color: #ff6400; /* Button background color */
   border: none; /* Remove border */
   border-radius: 5px; /* Rounded corners */
   cursor: pointer; /* Pointer cursor on hover */
@@ -40,7 +40,7 @@
 
 /* Button Hover Effect */
 .navbar-buttons button:hover {
-  background-color: #4CAF50; /* Darken background on hover */
+  background-color: #ff4000; /* Darken background on hover */
   transform: translateY(-2px); /* Lift effect on hover */
 }
 
