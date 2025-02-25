@@ -4,7 +4,7 @@
   flex-direction: row; /* Changed to row to align title and form horizontally */
   justify-content: center;
   align-items: center;
-  min-height: 90vh;
+  min-height: 85vh;
   gap: 100px;
   padding: 20px;
 }
@@ -108,8 +108,8 @@ label {
   transform: scale(1);
 }
 
-.google-login {
-  margin-top: 20px;
+.google-login, .github-login {
+  margin-top: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -124,7 +124,7 @@ label {
   font-weight: bold;
 }
 
-.google-login:hover {
+.google-login:hover, .github-login:hover {
   background: #f9f9f9;
   transform: scale(1.05);
 }
@@ -148,7 +148,8 @@ label {
   }
 
   .login-button,
-  .google-login {
+  .google-login,
+  .github-login {
     font-size: 14px;
     padding: 10px;
   }
