@@ -8,6 +8,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
+
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
   private userRoleSubject = new BehaviorSubject<string | null>(null);
@@ -27,6 +28,10 @@ export class AuthService {
   }
 
   googleLogin(token: any) {
+    this.doLoginUser('', token);
+  }
+
+  githubLogin(token: any) {
     this.doLoginUser('', token);
   }
 

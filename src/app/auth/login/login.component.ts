@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { bootstrapGoogle, bootstrapMic, bootstrapMicFill } from '@ng-icons/bootstrap-icons';
+import { bootstrapGoogle, bootstrapGithub } from '@ng-icons/bootstrap-icons';
 
 
 @Component({
@@ -13,7 +13,7 @@ import { bootstrapGoogle, bootstrapMic, bootstrapMicFill } from '@ng-icons/boots
   imports: [CommonModule, FormsModule, NgIcon],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [provideIcons({ bootstrapGoogle })],
+  providers: [provideIcons({ bootstrapGoogle, bootstrapGithub })],
 })
 export class LoginComponent {
   email = '';
@@ -23,6 +23,7 @@ export class LoginComponent {
   router = inject(Router);
 
   googleIcon = bootstrapGoogle;
+  githubIcon = bootstrapGithub;
 
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
@@ -55,8 +56,9 @@ export class LoginComponent {
   googleLogin() {
     window.location.href = 'https://rent-a-read-0jps.onrender.com/auth/login/google';
   }
-  // googleLogin() {
-
-  // }
+  
+  githubLogin() {
+    window.location.href = 'https://rent-a-read-0jps.onrender.com/auth/login/github';
+    }
 
 }

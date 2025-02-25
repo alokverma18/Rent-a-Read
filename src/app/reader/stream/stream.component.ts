@@ -42,7 +42,7 @@ export class StreamComponent implements OnInit {
   // Load and extract text from the PDF using pdfjs-dist
   async loadPdfText(pdfUrl: string) {
     try {
-      this.http.post<any>('http://localhost:5000/rentals/extract', { url: pdfUrl }).subscribe(
+      this.http.post<any>('https://rent-a-read-0jps.onrender.com/rentals/extract', { url: pdfUrl }).subscribe(
         response => {
           this.extractedText = response.text;
         },

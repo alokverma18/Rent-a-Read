@@ -47,31 +47,19 @@
   
       <!-- Role Selection (Reader or Bookowner) -->
       <div class="form-group role-selection">
-        <label for="role">Role</label><br />
-        <input
-          type="radio"
-          id="reader"
-          name="role"
-          value="reader"
-          [(ngModel)]="role"
-          required
-        />
-        <label for="reader">Reader</label>
-        <input
-          type="radio"
-          id="owner"
-          name="role"
-          value="owner"
-          [(ngModel)]="role"
-          required
-        />
-        <label for="owner">Owner</label>
+        <label class="role-label" for="role">Role : </label>
+        <select name="role" [(ngModel)]="role" required>
+          <option value="reader">Reader</option>
+          <option value="owner">Owner</option>
+        </select>
       </div>
   
       <!-- Submit Button -->
-      <button type="submit">
-        Register
-      </button>
+      <button type="submit">Register</button>
+
+      <button class="google-register" (click)="googleRegister()">Register with &nbsp; <ng-icon [svg]="googleIcon" /> </button>
+      <button class="github-register" (click)="githubRegister()">Register with &nbsp; <ng-icon [svg]="githubIcon" /> </button>  
+    
     </form>
   </div>
 </div>
