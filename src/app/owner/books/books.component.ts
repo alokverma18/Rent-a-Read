@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OwnerService } from '../owner.service';
+import { OwnerService, Book } from '../owner.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BookFormComponent } from '../book-form/book-form.component';
@@ -9,12 +9,12 @@ import { BookFormComponent } from '../book-form/book-form.component';
   standalone: true,
   imports: [CommonModule, FormsModule, BookFormComponent],
   templateUrl: './books.component.html',
-  styleUrl: './books.component.css'
+  styleUrls: ['./books.component.css']
 })
 export class BooksComponent implements OnInit {
-  books: any[] = [];
+  books: Book[] = [];
   isModalOpen = false;
-  selectedBook: any = null;
+  selectedBook: Book | null = null;
 
   constructor(private ownerService: OwnerService) {}
 
@@ -23,8 +23,13 @@ export class BooksComponent implements OnInit {
   }
 
   loadBooks() {
-    this.ownerService.getBooks().subscribe(data => {
-      this.books = data;
+    this.ownerService.getBooks().subscribe({
+      next: (data) => {
+        this.books = data;
+      },
+      error: (error) => {
+        console.error('Error loading books:', error);
+      }
     });
   }
 
@@ -33,9 +38,11 @@ export class BooksComponent implements OnInit {
     this.isModalOpen = true;
   }
 
-  openEditBookModal(book: any) {
-    this.selectedBook = book;
-    this.selectedBook.published_date = new Date(book.published_date).toISOString().split('T')[0];
+  openEditBookModal(book: Book) {
+    this.selectedBook = { ...book };
+    if (book.published_date) {
+      this.selectedBook.published_date = new Date(book.published_date).toISOString().split('T')[0];
+    }
     this.isModalOpen = true;
   }
 
@@ -45,8 +52,13 @@ export class BooksComponent implements OnInit {
   }
 
   deleteBook(bookId: string) {
-    this.ownerService.deleteBook(bookId).subscribe(() => {
-      this.loadBooks();
+    this.ownerService.deleteBook(bookId).subscribe({
+      next: () => {
+        this.loadBooks();
+      },
+      error: (error) => {
+        console.error('Error deleting book:', error);
+      }
     });
   }
 }

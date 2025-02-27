@@ -7,25 +7,25 @@ import { map, Observable } from 'rxjs';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
   isReader: boolean = false;
-  constructor(public router: Router,
+  
+  constructor(
+    public router: Router,
     private authService: AuthService  
   ) {
     this.isReader = this.authService.getUserRole() === 'reader';
   }
-
-  // Add logout or other functionality if needed
+  
   isAuthenticated() {
     return this.authService.isLoggedIn();
   }
-
   
-   // Navigate to login page
+  // Navigate to login page
   goToLogin() {
     this.router.navigate(['/login']);
   }
@@ -34,12 +34,12 @@ export class HeaderComponent {
   goToRegister() {
     this.router.navigate(['/register']);
   }
-
+  
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
-
+  
   goToRentals() {
     this.router.navigate(['/reader/rentals']);
   }

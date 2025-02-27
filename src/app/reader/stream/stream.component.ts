@@ -3,6 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+
+interface PdfTextResponse {
+  text: string;
+}
 
 @Component({
   standalone: true,
@@ -17,6 +24,7 @@ export class StreamComponent implements OnInit {
   isReading: boolean = false;
   synth = window.speechSynthesis;
   utterance = new SpeechSynthesisUtterance();
+  private apiUrl = environment.apiUrl;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,17 +47,21 @@ export class StreamComponent implements OnInit {
     };
   }
 
-  // Load and extract text from the PDF using pdfjs-dist
+  // Load and extract text from the PDF
   async loadPdfText(pdfUrl: string) {
     try {
-      this.http.post<any>('https://rent-a-read-0jps.onrender.com/rentals/extract', { url: pdfUrl }).subscribe(
-        response => {
-          this.extractedText = response.text;
-        },
-        error => {
-          console.error('Error fetching PDF text:', error);
-        }
-      );
+      this.http.post<PdfTextResponse>(`${this.apiUrl}/rentals/extract`, { url: pdfUrl })
+        .pipe(
+          catchError(error => {
+            console.error('Error fetching PDF text:', error);
+            return of({ text: 'Failed to extract text from PDF.' });
+          })
+        )
+        .subscribe({
+          next: (response) => {
+            this.extractedText = response.text;
+          }
+        });
     } catch (error) {
       console.error('Error extracting text from PDF:', error);
     }
