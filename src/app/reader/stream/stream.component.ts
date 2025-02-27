@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   standalone: true,
@@ -24,6 +25,8 @@ export class StreamComponent implements OnInit {
     private http: HttpClient
   ) {}
 
+  apiUrl = environment.apiUrl;
+
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const encodedUrl = params.get('url');
@@ -42,7 +45,7 @@ export class StreamComponent implements OnInit {
   // Load and extract text from the PDF using pdfjs-dist
   async loadPdfText(pdfUrl: string) {
     try {
-      this.http.post<any>('https://rent-a-read-0jps.onrender.com/rentals/extract', { url: pdfUrl }).subscribe(
+      this.http.post<any>(`${this.apiUrl}/rentals/extract`, { url: pdfUrl }).subscribe(
         response => {
           this.extractedText = response.text;
         },

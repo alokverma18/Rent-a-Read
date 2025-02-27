@@ -147,10 +147,18 @@ def add_book():
 def update_book(book_id):
     data = request.form
     print(data)
-    owner_id = ObjectId(get_jwt_identity())  # Extract the owner_id from the JWT
-    db = current_app.db
 
-    print(type(data['published_date']))
+    file = request.files['file']  # Get the file from request
+
+    # Upload the file to S3
+    s3_key = f"books/{data.get('title')}"
+    bucket_name = current_app.config['S3_BUCKET']
+    
+    s3.upload_fileobj(file, bucket_name, s3_key)
+
+    owner_id = ObjectId(get_jwt_identity())
+
+    db = current_app.db
     
     db.books.update_one(
         {'_id': ObjectId(book_id), 'owner_id': owner_id},

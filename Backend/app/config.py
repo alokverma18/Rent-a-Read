@@ -20,3 +20,5 @@ class Config:
     # Razorpay Configuration
     RAZORPAY_KEY = os.getenv('RAZORPAY_KEY')
     RAZORPAY_SECRET = os.getenv('RAZORPAY_SECRET')
+
+    FRONTEND_URL = os.getenv("FRONTEND_URL")

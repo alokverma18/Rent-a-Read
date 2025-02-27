@@ -5,6 +5,7 @@ import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { bootstrapGoogle, bootstrapGithub } from '@ng-icons/bootstrap-icons';
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class RegisterComponent {
   role = 'reader';  // Default role
   authService = inject(AuthService);
   router = inject(Router);
+  apiUrl = environment.apiUrl;
 
   googleIcon = bootstrapGoogle;
   githubIcon = bootstrapGithub;
@@ -42,10 +44,10 @@ export class RegisterComponent {
       });
   }
   googleRegister() {
-    window.location.href = 'https://rent-a-read-0jps.onrender.com/auth/login/google';
+    window.location.href = `${this.apiUrl}/auth/login/google`;
   }
   
   githubRegister() {
-    window.location.href = 'https://rent-a-read-0jps.onrender.com/auth/login/github';
+    window.location.href = `${this.apiUrl}/auth/login/github`;
     }
 }

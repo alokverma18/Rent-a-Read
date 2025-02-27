@@ -6,6 +6,7 @@ from werkzeug.security import generate_password_hash
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity
 from app.models.user import User
 from authlib.integrations.flask_client import OAuth
+from app.config import Config
 import os
 
 auth_bp = Blueprint('auth', __name__)
@@ -61,7 +62,7 @@ def authorize_google():
     access_token = create_access_token(identity=str(user_id), additional_claims={"role": "reader"})
     refresh_token = create_refresh_token(identity=str(user_id))
 
-    frontend_url = f"https://rentaread.vercel.app/auth-callback?access_token={access_token}&refresh_token={refresh_token}&role=reader"
+    frontend_url = f"{Config.FRONTEND_URL}/auth-callback?access_token={access_token}&refresh_token={refresh_token}&role=reader"
     return redirect(frontend_url)
 
     # return jsonify({
@@ -231,5 +232,5 @@ def github_callback():
     jwt_access_token = create_access_token(identity=str(user_id), additional_claims={"role": "reader"})
     jwt_refresh_token = create_refresh_token(identity=str(user_id))
 
-    frontend_url = f"https://rentaread.vercel.app/github-auth-callback?access_token={jwt_access_token}&refresh_token={jwt_refresh_token}&role=reader"
+    frontend_url = f"{Config.FRONTEND_URL}/github-auth-callback?access_token={jwt_access_token}&refresh_token={jwt_refresh_token}&role=reader"
     return redirect(frontend_url)

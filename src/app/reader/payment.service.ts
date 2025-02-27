@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-// import * as Razorpay from 'razorpay';
+import { environment } from '../../environments/environment';
 
 declare var Razorpay: any;
 
@@ -12,7 +12,7 @@ declare var Razorpay: any;
 })
 export class PaymentService {
 
-    private apiUrl = 'https://rent-a-read-0jps.onrender.com/';
+    private apiUrl = environment.apiUrl;
 
     constructor(
       private http: HttpClient,

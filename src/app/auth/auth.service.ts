@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class AuthService {
   private userRoleSubject = new BehaviorSubject<string | null>(null);
   private router = inject(Router);
   private http = inject(HttpClient);
-  private apiUrl = 'https://rent-a-read-0jps.onrender.com/';
+  private apiUrl = environment.apiUrl;
 
   constructor() {}
 

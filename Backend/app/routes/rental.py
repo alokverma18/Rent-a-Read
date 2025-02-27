@@ -7,6 +7,7 @@ import requests
 from app.models.rental import Rental
 from app.services.s3 import generate_presigned_url
 from bson import ObjectId
+import os
 
 rental_bp = Blueprint('rentals', __name__)
 
@@ -81,10 +82,21 @@ def extract_text():
     if response.status_code != 200:
         return jsonify({'error': 'Failed to fetch PDF'}), 500
 
-    with open('temp.pdf', 'wb') as f:
-        f.write(response.content)
+    temp_file = 'temp.pdf'
+    try:
+        with open(temp_file, 'wb') as f:
+            f.write(response.content)
 
-    doc = fitz.open('temp.pdf')
-    text = ''.join(page.get_text() for page in doc)
-    
+        # Open and extract text
+        doc = fitz.open(temp_file)
+        text = ''.join(page.get_text() for page in doc)
+        doc.close()  # Make sure to close the document before deleting the file
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+    finally:
+        if os.path.exists(temp_file):
+            os.remove(temp_file)  # Delete the file after processing
+
     return jsonify({'text': text})

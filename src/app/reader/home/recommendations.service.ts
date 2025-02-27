@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,9 @@ export class RecommendationsService {
     private http: HttpClient
   ) { }
 
-  private apiUrl = 'https://rent-a-read-0jps.onrender.com/recommend/';
+  private apiUrl = environment.apiUrl;
 
   fetchRecommendations(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    return this.http.get<any[]>(`${this.apiUrl}/recommend/`);
   }
 }
