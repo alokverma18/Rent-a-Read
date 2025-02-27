@@ -2,19 +2,19 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap, catchError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
   private userRoleSubject = new BehaviorSubject<string | null>(null);
   private router = inject(Router);
   private http = inject(HttpClient);
-  private apiUrl = 'https://rent-a-read-0jps.onrender.com/';
+  private apiUrl = environment.apiUrl;
 
   constructor() {}
 
@@ -23,7 +23,11 @@ export class AuthService {
 
   login(user: { email: string; password: string; role: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/login`, user).pipe(
-      tap((tokens: any) => this.doLoginUser(user.email, JSON.stringify(tokens)))
+      tap((tokens: any) => this.doLoginUser(user.email, JSON.stringify(tokens))),
+      catchError(error => {
+        console.error('Login failed:', error);
+        throw error;
+      })
     );
   }
 

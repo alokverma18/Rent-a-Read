@@ -1,19 +1,30 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { Book } from '../../owner/owner.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecommendationsService {
-
   constructor(
     private http: HttpClient
   ) { }
 
-  private apiUrl = 'https://rent-a-read-0jps.onrender.com/recommend/';
+  private apiUrl = `${environment.apiUrl}/recommend`;
 
-  fetchRecommendations(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  fetchRecommendations(): Observable<Book[]> {
+    return this.http.get<Book[]>(this.apiUrl)
+      .pipe(
+        catchError(this.handleError('fetchRecommendations'))
+      );
+  }
+
+  private handleError(operation = 'operation') {
+    return (error: any): Observable<any> => {
+      console.error(`${operation} failed: ${error.message}`);
+      return throwError(() => new Error(`${operation} failed: ${error.message}`));
+    };
   }
 }

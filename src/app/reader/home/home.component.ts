@@ -3,23 +3,10 @@ import { BookService } from '../book.service';
 import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { SpeechService } from './speech.service';
+import { SpeechService, SpeechToTextResponse } from './speech.service';
 import { RecommendationsService } from './recommendations.service';
-
-export interface Book {
-  _id: string;
-  title: string;
-  author: string;
-  isbn: string;
-  published_date: Date;
-  price_per_hour: number;
-  owner_id: string;
-  created_at: Date;
-  description: string;
-  cover_image_url: string;
-  genres: string[];
-  availability: boolean;
-}
+import { catchError, of } from 'rxjs';
+import { Book } from '../../owner/owner.service';
 
 @Component({
   standalone: true,
@@ -28,13 +15,16 @@ export interface Book {
   styleUrls: ['./home.component.css'],
   imports: [FormsModule, CommonModule],
 })
-
 export class HomeComponent implements OnInit {
-
   books: Book[] = [];
   filteredBooks: Book[] = [];
   sortBy: keyof Book = 'title'; 
   sortOrder: string = 'asc';
+  isRecording: boolean = false;
+  audioChunks: Blob[] = [];
+  mediaRecorder!: MediaRecorder;
+  recommendedBooks: Book[] = [];
+
   filters = {
     search: signal(''),
     title: signal(''),
@@ -59,9 +49,14 @@ export class HomeComponent implements OnInit {
   }
 
   loadBooks() {
-    this.bookService.getBooks().subscribe((data: Book[]) => {
-      this.books = data;
-      this.applyFilters(); 
+    this.bookService.getBooks().subscribe({
+      next: (data: Book[]) => {
+        this.books = data;
+        this.applyFilters();
+      },
+      error: (error) => {
+        console.error('Error loading books:', error);
+      }
     });
   }
 
@@ -85,7 +80,6 @@ export class HomeComponent implements OnInit {
     this.filteredBooks.sort((a, b) => {
       const aValue = a[this.sortBy]; 
       const bValue = b[this.sortBy]; 
-
       if (this.sortOrder === 'asc') {
         return aValue > bValue ? 1 : -1;
       } else {
@@ -104,7 +98,8 @@ export class HomeComponent implements OnInit {
   
     this.filteredBooks = this.books.filter((book) => {
       return (
-        (!this.filters.search() || book.title.toLowerCase().includes(searchText) || book.description.toLowerCase().includes(searchText)) &&
+        (!this.filters.search() || book.title.toLowerCase().includes(searchText) || 
+          (book.description && book.description.toLowerCase().includes(searchText))) &&
         (!this.filters.title() || book.title.toLowerCase().includes(this.filters.title().toLowerCase())) &&
         (!this.filters.author() || book.author.toLowerCase().includes(this.filters.author().toLowerCase())) &&
         (!this.filters.genre() || book.genres.includes(this.filters.genre()))
@@ -114,6 +109,7 @@ export class HomeComponent implements OnInit {
   }
 
   rentBook(bookId: string) {
+    // Implementation to be added if needed
   }
 
   getUniqueGenres() {
@@ -124,10 +120,6 @@ export class HomeComponent implements OnInit {
   openBook(book: Book) {
     this.router.navigate(['/book', book._id]);
   }
-
-  isRecording: boolean = false;
-  audioChunks: Blob[] = [];
-  mediaRecorder!: MediaRecorder;
 
   async startRecording() {
     try {
@@ -166,22 +158,22 @@ export class HomeComponent implements OnInit {
     const formData = new FormData();
     formData.append('audio', audioBlob, 'recording.webm');
   
-    this.speechService.convertSpeechToText(formData).subscribe(
-      (response) => {
-        if (response.text) {
-          this.filters.search.set(response.text);
-          console.log(response.text);
-          this.applyFilters();
+    this.speechService.convertSpeechToText(formData)
+      .pipe(
+        catchError(error => {
+          console.error('Speech to text conversion error:', error);
+          return of({ text: '' } as SpeechToTextResponse);
+        })
+      )
+      .subscribe({
+        next: (response) => {
+          if (response.text) {
+            this.filters.search.set(response.text);
+            this.applyFilters();
+          }
         }
-      },
-      (error) => {
-        console.error('Error:', error);
-      }
-    );
+      });
   }
-
-
-  recommendedBooks: Book[] = [];
 
   fetchRecommendations(): void {
     this.recommendationService.fetchRecommendations().subscribe({
@@ -189,7 +181,4 @@ export class HomeComponent implements OnInit {
       error: (err) => console.error("Failed to fetch recommendations", err)
     });
   }
-
-
-  
 }
