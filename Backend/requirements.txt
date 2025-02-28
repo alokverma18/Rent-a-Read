@@ -25,6 +25,7 @@ numpy==2.2.3
 oauthlib==2.1.0
 packaging==24.2
 pandas==2.2.3
+PyAudio==0.2.14
 pycparser==2.22
 PyJWT==2.9.0
 pymongo==4.8.0
