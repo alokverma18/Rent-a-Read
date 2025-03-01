@@ -37,7 +37,7 @@ def get_recommendations():
 
     # Convert genre lists to feature vectors
     all_users = list(user_genre_map.keys())
-    genre_vectors = pd.DataFrame.from_dict(user_genre_map, orient="index").fillna("").applymap(lambda x: ",".join(x))
+    genre_vectors = pd.DataFrame.from_dict(user_genre_map, orient="index").fillna("").map(lambda x: ",".join(x))
 
     # Convert genres into one-hot encoding
     genre_matrix = pd.get_dummies(genre_vectors[0].str.split(",").explode()).groupby(level=0).sum()
@@ -61,8 +61,17 @@ def get_recommendations():
         similar_user_books = {str(r["book_id"]) for r in rentals if str(r["renter_id"]) == similar_user}
         recommended_books.update(similar_user_books - user_books)
 
-    # print("recommended_books ", recommended_books)
-    # Fetch book details
+    # If no recommendations found from similar users, recommend based on top genres
+    if not recommended_books:
+        print("No recommendations from similar users, falling back to genre-based recommendations")
+        user_genres = Counter(user_genre_map[str(user_id)])
+        top_genres = [genre for genre, _ in user_genres.most_common(3)]
+        recommended_books.update(
+            {str(book["_id"]) for book in books.values() if any(g in book["genres"] for g in top_genres)}
+        )
+        recommended_books -= user_books
+
+    # Fetch book details from first 5 recommended books
     recommended_book_details = [
         {
         "_id": str(book["_id"]),
@@ -78,7 +87,8 @@ def get_recommendations():
         "availability": book["availability"],
         "created_at": book["created_at"]
         }
-        for book_id, book in books.items() if book_id in recommended_books
+        
+        for book_id, book in books.items() if book_id in list(recommended_books)[:5]
     ]
     # print("recommended_book_details ", recommended_book_details)
 
