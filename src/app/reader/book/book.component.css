@@ -6,10 +6,12 @@
   padding: 30px;
   max-width: 1200px;
   margin: 40px auto;
-  background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   gap: 20px; /* Space between image and content */
+
+  background-color: #161b22;
+  color: white;
 }
 
 /* Image Styling */
@@ -34,7 +36,6 @@
 /* Title Styling */
 h2 {
   font-size: 2.5em;
-  color: #333;
   margin: 0 auto 15px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
@@ -43,7 +44,6 @@ h2 {
 /* Text Paragraph Styling */
 p {
   font-size: 1.1em;
-  color: #555;
   margin: 10px 0;
 }
 

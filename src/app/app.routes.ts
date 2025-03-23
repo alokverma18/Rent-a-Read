@@ -12,6 +12,7 @@ import { ReaderRentalsComponent } from './reader/rentals/rentals.component';
 import { StreamComponent } from './reader/stream/stream.component';
 import { GoogleAuthCallbackComponent } from './auth/google-auth-callback.component';
 import { GithubAuthCallbackComponent } from './auth/github-auth-callback.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 export const routes: Routes = [
@@ -55,31 +56,47 @@ export const routes: Routes = [
   },
 
   { path: 'book/:id', 
-    component: BookComponent 
+    component: BookComponent,
+    canActivate: [AuthGuard],
   }, 
 
   {
     path: 'owner/books',
     component: BooksComponent,
     data: { role: 'owner' },
+    canActivate: [AuthGuard],
   },
 
   {
     path: 'owner/rentals',
     component: RentalsComponent,
     data: { role: 'owner' },
+    canActivate: [AuthGuard],
   },
 
   {
     path: 'reader/rentals',
     component: ReaderRentalsComponent,
     data: { role: 'reader' },
+    canActivate: [AuthGuard],
   },
 
   {
     path: 'reader/stream/:url',
     component: StreamComponent,
     data: { role: 'reader' },
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: '**',
+    redirectTo: '/login',
   }
 ];
 

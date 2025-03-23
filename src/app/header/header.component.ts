@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth/auth.service';
-import { map, Observable } from 'rxjs';
+import { UserService } from '../profile/user.service';
 
 @Component({
   selector: 'app-header',
@@ -11,26 +11,35 @@ import { map, Observable } from 'rxjs';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   isReader: boolean = false;
-  constructor(public router: Router,
-    private authService: AuthService  
-  ) {
+  profilePictureUrl: string = 'assets/user.png'; 
+  dropdownOpen: boolean = false; // Dropdown state
+
+  constructor(
+    public router: Router,
+    private authService: AuthService,
+    private userService: UserService 
+  ) {}
+
+  ngOnInit() {
     this.isReader = this.authService.getUserRole() === 'reader';
+
+    if (this.isAuthenticated()) {
+      this.userService.getUserProfile().subscribe(user => {
+        this.profilePictureUrl = user.profile_picture || 'assets/user.png';
+      });
+    }
   }
 
-  // Add logout or other functionality if needed
   isAuthenticated() {
     return this.authService.isLoggedIn();
   }
 
-  
-   // Navigate to login page
   goToLogin() {
     this.router.navigate(['/login']);
   }
-  
-  // Navigate to register page
+
   goToRegister() {
     this.router.navigate(['/register']);
   }
@@ -42,5 +51,17 @@ export class HeaderComponent {
 
   goToRentals() {
     this.router.navigate(['/reader/rentals']);
+  }
+
+  goToProfile() {
+    this.router.navigate(['/profile']);
+  }
+
+  toggleTheme() {
+    console.log('Toggling theme...');
+  }
+
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
   }
 }
