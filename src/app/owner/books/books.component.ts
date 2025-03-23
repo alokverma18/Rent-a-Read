@@ -3,6 +3,7 @@ import { OwnerService } from '../owner.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BookFormComponent } from '../book-form/book-form.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-books',
@@ -16,7 +17,10 @@ export class BooksComponent implements OnInit {
   isModalOpen = false;
   selectedBook: any = null;
 
-  constructor(private ownerService: OwnerService) {}
+  constructor(
+    private ownerService: OwnerService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.loadBooks();
@@ -46,6 +50,10 @@ export class BooksComponent implements OnInit {
 
   deleteBook(bookId: string) {
     this.ownerService.deleteBook(bookId).subscribe(() => {
+      this.snackBar.open('Book deleted successfully!', 'Close', {
+        duration: 3000,
+        verticalPosition: 'top'
+      });
       this.loadBooks();
     });
   }

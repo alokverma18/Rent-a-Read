@@ -8,6 +8,7 @@ from app.models.user import User
 from authlib.integrations.flask_client import OAuth
 from app.config import Config
 import os
+import re
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -50,7 +51,10 @@ def authorize_google():
     if not user:
         new_user = {
             "email": user_info["email"],
-            "username": user_info["name"],
+            # replace anything that is not a letter, number, or underscore with an underscore
+            "username": re.sub(r'\W', '_', user_info["name"]),  
+            "name": user_info["name"],
+            "profile_picture": user_info["picture"],
             "password_hash": None,  # No password for Google OAuth users
             "role": "reader",  # Default role for new users
             "created_at": datetime.now()
@@ -213,17 +217,21 @@ def github_callback():
     github_id = user_data["id"]
     username = user_data.get("login", "")
     email = user_data.get("email", "")
+    name = user_data.get("name", "")
+    profile_picture = user_data.get("avatar_url", "")
 
     db = current_app.db
     user = db.users.find_one({"email": email})
 
     if not user:
         new_user = {
+            "name": name,
             "email": email,
             "username": username,
             "password_hash": None, 
             "role": "reader",
-            "created_at": datetime.now()
+            "created_at": datetime.now(),
+            "profile_picture": profile_picture,
         }
         user_id = db.users.insert_one(new_user).inserted_id
     else:

@@ -23,6 +23,7 @@ def get_profile():
     return jsonify({
         "username": user["username"],
         "email": user["email"],
+        "name": user.get("name"),
         "role": user["role"],
         "created_at": user["created_at"],
         "profile_picture": user.get("profile_picture")
@@ -37,11 +38,11 @@ def update_profile():
     db = current_app.db
     
     update_data = {}
+    if 'name' in data:
+        update_data['name'] = data['name']
     if 'username' in data:
         update_data['username'] = data['username']
-    if 'email' in data:
-        update_data['email'] = data['email']
-    
+
     if update_data:
         db.users.update_one({"_id": ObjectId(current_user_id)}, {"$set": update_data})
     

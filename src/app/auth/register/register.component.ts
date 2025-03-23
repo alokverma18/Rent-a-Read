@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { bootstrapGoogle, bootstrapGithub } from '@ng-icons/bootstrap-icons';
 import { environment } from '../../../environments/environment';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -17,6 +18,7 @@ import { environment } from '../../../environments/environment';
   providers: [provideIcons({ bootstrapGoogle, bootstrapGithub })],
 })
 export class RegisterComponent {
+  constructor(private snackBar: MatSnackBar) {}
   email = '';
   username = '';
   password = '';
@@ -36,10 +38,17 @@ export class RegisterComponent {
         email: this.email,
         username: this.username,
         password: this.password,
-        role: this.role,  // Include the role
+        role: this.role,
       })
       .subscribe(() => {
-        alert('Registration successful!');
+        this.authService.login({ email: this.email, password: this.password, role: this.role }).subscribe(() => {
+          this.snackBar.open('User registration successful!', 'Close', {
+            duration: 3000,
+            verticalPosition: 'top'
+          });
+            this.router.navigate(['/profile']);
+          }
+        );
         this.router.navigate(['/login']);
       });
   }

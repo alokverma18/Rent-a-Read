@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from './user.service';
 import { AuthService } from '../auth/auth.service';
+import { CommonModule } from '@angular/common';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   standalone: true,
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
-  imports: [ReactiveFormsModule, FormsModule]
+  imports: [ReactiveFormsModule, FormsModule, CommonModule]
 })
 export class ProfileComponent implements OnInit {
   profileForm!: FormGroup;
@@ -17,15 +19,17 @@ export class ProfileComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
     this.profileForm = this.fb.group({
-      username: [''],
-      name: [''],
-      email: [''],
-      role: [''],
+      username: ['', Validators.required],
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      role: ['', Validators.required],
+      created_at: ['', Validators.required],
       password: ['']
     });
 
@@ -40,14 +44,25 @@ export class ProfileComponent implements OnInit {
         name: user.name,
         email: user.email,
         role: user.role,
+        created_at: user.created_at
       });
       this.profilePictureUrl = user.profile_picture || 'assets/user.png';
     });
   }
 
   updateProfile() {
+    if (this.profileForm.invalid) {
+      this.snackBar.open('Please fill in all required fields!', 'Close', {
+        duration: 3000,
+        verticalPosition: 'top'
+      });
+      return;
+    }
     this.userService.updateUserProfile(this.profileForm.value).subscribe(() => {
-      alert('Profile updated successfully!');
+      this.snackBar.open('Profile updated successfully!', 'Close', {
+        duration: 3000,
+        verticalPosition: 'top'
+      });
     });
   }
 
@@ -57,7 +72,11 @@ export class ProfileComponent implements OnInit {
       console.log(file);
       this.userService.updateProfilePicture(file).subscribe((response) => {
         this.profilePictureUrl = response.profile_picture_url;
+        this.snackBar.open('Profile picture updated successfully!', 'Close', {
+          duration: 3000,
+          verticalPosition: 'top'
+        });
       });
     }
-  }
+  }  
 }

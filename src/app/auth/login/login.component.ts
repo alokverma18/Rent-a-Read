@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { bootstrapGoogle, bootstrapGithub } from '@ng-icons/bootstrap-icons';
 import { environment } from '../../../environments/environment';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -26,6 +27,10 @@ export class LoginComponent {
 
   googleIcon = bootstrapGoogle;
   githubIcon = bootstrapGithub;
+
+  constructor(
+    private snackBar: MatSnackBar) 
+  {}
 
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
@@ -50,6 +55,10 @@ export class LoginComponent {
           }
         },
         (error) => {
+          this.snackBar.open(error.error.message, 'Close', {
+            duration: 3000,
+            verticalPosition: 'top'
+          });
           console.error(error);
         }
       );

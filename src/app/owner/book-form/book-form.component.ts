@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { OwnerService } from '../owner.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   standalone: true,
@@ -26,9 +27,12 @@ export class BookFormComponent implements OnInit {
     availability: 'Available'
   };
   
-  file: File | null = null;  // To handle the uploaded file
+  file: File | null = null; 
 
-  constructor(private ownerService: OwnerService) {}
+  constructor(
+    private ownerService: OwnerService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     if (this.book) {
@@ -81,17 +85,24 @@ export class BookFormComponent implements OnInit {
     formData.append('availability', bookPayload.availability);
 
     if (this.file) {
-      formData.append('file', this.file);  // Attach the uploaded file to formData
+      formData.append('file', this.file); 
     }
 
     if (this.book) {
-
       formData.set('published_date', new Date(bookPayload.published_date).toDateString());
       this.ownerService.updateBook(this.book._id, formData).subscribe(() => {
+        this.snackBar.open('Book updated successfully!', 'Close', {
+          duration: 3000,
+          verticalPosition: 'top'
+        });
         this.closeForm();
       });
     } else {
       this.ownerService.addBook(formData).subscribe(() => {
+        this.snackBar.open('Book added successfully!', 'Close', {
+          duration: 3000,
+          verticalPosition: 'top'
+        });
         this.closeForm();
       });
     }

@@ -10,12 +10,13 @@
     <form [formGroup]="profileForm" (ngSubmit)="updateProfile()" class="profile-form">
         <div class="form-group">
           <label>Username:</label>
-          <input type="text" formControlName="username" readonly />
+          <input type="text" formControlName="username" />
         </div>
       
         <div class="form-group">
           <label>Name:</label>
           <input type="text" formControlName="name" />
+          <!-- <p *ngIf="profileForm.controls['name'].invalid && profileForm.controls['name'].touched"> Name is required.</p> -->
         </div>
       
         <div class="form-group">
@@ -26,6 +27,11 @@
         <div class="form-group">
           <label>Role:</label>
           <input type="text" formControlName="role" readonly />
+        </div>
+
+        <div class="form-group">
+          <label>Account since:</label>
+          <input type="text" formControlName="created_at" readonly />
         </div>
       
         <div class="full-width">

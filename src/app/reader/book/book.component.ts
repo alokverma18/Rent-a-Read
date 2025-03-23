@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BookService } from '../book.service';
 import { CommonModule } from '@angular/common';
 import { PaymentService } from '../payment.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-book',
@@ -19,7 +20,8 @@ export class BookComponent implements OnInit {
   constructor(
     private route: ActivatedRoute, 
     private bookService: BookService,
-    private paymentService: PaymentService
+    private paymentService: PaymentService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -42,12 +44,18 @@ export class BookComponent implements OnInit {
       const result = await this.paymentService.createTransaction(book.price_per_hour, book._id);
       if (result.success) {
         this.bookService.rentBook(result.details).subscribe((res) => {
+          this.snackBar.open('Book rented successfully!', 'Close', {
+            duration: 3000,
+            verticalPosition: 'top'
+          });
         });
-        alert('Book rented successfully!');
       }
     } catch (error) {
       console.error('Error during transaction:', error);
-      alert('Failed to rent book.');
+      this.snackBar.open('Error renting book. Please try again.', 'Close', {
+        duration: 3000,
+        verticalPosition: 'top'
+      });
     }
   }
   
