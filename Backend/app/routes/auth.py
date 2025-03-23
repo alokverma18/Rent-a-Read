@@ -51,12 +51,11 @@ def authorize_google():
     if not user:
         new_user = {
             "email": user_info["email"],
-            # replace anything that is not a letter, number, or underscore with an underscore
-            "username": re.sub(r'\W', '_', user_info["name"]),  
+            "username": re.sub(r'\W', '_', user_info["name"]).lower(),  
             "name": user_info["name"],
             "profile_picture": user_info["picture"],
-            "password_hash": None,  # No password for Google OAuth users
-            "role": "reader",  # Default role for new users
+            "password_hash": None, 
+            "role": "reader", 
             "created_at": datetime.now()
         }
         user_id = db.users.insert_one(new_user).inserted_id

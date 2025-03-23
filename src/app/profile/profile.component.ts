@@ -14,7 +14,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class ProfileComponent implements OnInit {
   profileForm!: FormGroup;
-  profilePictureUrl: string = 'assets/user.png'; // Default avatar
+  profilePictureUrl: string = 'assets/user.png';
 
   constructor(
     private fb: FormBuilder,
@@ -38,7 +38,6 @@ export class ProfileComponent implements OnInit {
 
   loadUserProfile() {
     this.userService.getUserProfile().subscribe(user => {
-      console.log(user);
       this.profileForm.patchValue({
         username: user.username,
         name: user.name,
@@ -72,6 +71,7 @@ export class ProfileComponent implements OnInit {
       console.log(file);
       this.userService.updateProfilePicture(file).subscribe((response) => {
         this.profilePictureUrl = response.profile_picture_url;
+        this.ngOnInit();
         this.snackBar.open('Profile picture updated successfully!', 'Close', {
           duration: 3000,
           verticalPosition: 'top'
