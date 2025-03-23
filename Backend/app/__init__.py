@@ -4,7 +4,7 @@ from flask_jwt_extended import JWTManager
 from pymongo import MongoClient
 from app.config import Config
 from app.routes.auth import auth_bp, oauth
-from app.routes.users import users_bp
+from app.routes.user import user_bp
 from app.routes.book import book_bp
 from app.routes.rental import rental_bp
 from app.routes.test import test_bp 
@@ -41,7 +41,7 @@ def create_app():
     app.register_blueprint(rental_bp, url_prefix="/rentals")
     app.register_blueprint(test_bp, url_prefix="/test")
     app.register_blueprint(auth_bp, url_prefix="/auth")
-    app.register_blueprint(users_bp, url_prefix="/users")
+    app.register_blueprint(user_bp, url_prefix="/user")
     app.register_blueprint(owner_bp, url_prefix="/owner")
     app.register_blueprint(payment_bp, url_prefix="/payment")
     app.register_blueprint(speech_bp, url_prefix="/speech")

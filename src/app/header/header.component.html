@@ -2,10 +2,29 @@
   <div class="navbar-container">
     <a class="navbar-brand" href="/">Rent-a-Read</a>
     <div class="navbar-buttons">
-      <button *ngIf="!isAuthenticated()" (click)="goToLogin()">Login</button>
-      <button *ngIf="!isAuthenticated()" (click)="goToRegister()">Register</button>
-      <button *ngIf="isAuthenticated() && isReader" (click)="goToRentals()" >My Rentals</button>
-      <button *ngIf="isAuthenticated()" (click)="logout()">Logout</button>
+      <button *ngIf="!(isAuthenticated$ | async)" (click)="goToLogin()">Login</button>
+      <button *ngIf="!(isAuthenticated$ | async)" (click)="goToRegister()">Register</button>
+      <button *ngIf="(isAuthenticated$ | async) && isReader" (click)="goToRentals()">My Rentals</button>
+
+      <!-- Profile Picture with Dropdown -->
+      <div class="profile-dropdown">
+        <img
+          *ngIf="(isAuthenticated$ | async)"
+          [src]="profilePictureUrl"
+          alt="Profile"
+          class="profile-picture"
+          (click)="toggleDropdown()"
+        />
+
+        <!-- Dropdown Menu -->
+        <div class="dropdown-menu" *ngIf="dropdownOpen" (click)="toggleDropdown()" (mouseleave)="toggleDropdown()">
+          <ul>
+            <li (click)="goToProfile()">User Settings</li>
+            <li (click)="toggleTheme()">Theme</li>
+            <li (click)="logout()">Logout</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
