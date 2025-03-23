@@ -1,0 +1,37 @@
+<div class="profile-container">
+    <h2>My Profile</h2>
+  
+    <div class="profile-pic-section">
+      <img [src]="profilePictureUrl" alt="Profile Picture" class="profile-pic" />
+      <br>
+      <input type="file" (change)="onFileSelected($event)" />
+    </div>
+  
+    <form [formGroup]="profileForm" (ngSubmit)="updateProfile()" class="profile-form">
+        <div class="form-group">
+          <label>Username:</label>
+          <input type="text" formControlName="username" readonly />
+        </div>
+      
+        <div class="form-group">
+          <label>Name:</label>
+          <input type="text" formControlName="name" />
+        </div>
+      
+        <div class="form-group">
+          <label>Email:</label>
+          <input type="email" formControlName="email" readonly />
+        </div>
+      
+        <div class="form-group">
+          <label>Role:</label>
+          <input type="text" formControlName="role" readonly />
+        </div>
+      
+        <div class="full-width">
+          <button type="submit">Save Changes</button>
+        </div>
+      </form>
+      
+  </div>
+  

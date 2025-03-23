@@ -1,3 +1,8 @@
+* {
+  background-color: #161b22;
+  color: white;
+}
+
 /* Full-Screen Centering Container */
 .container {
   display: flex;
@@ -38,7 +43,6 @@
 
 label {
   font-size: 14px;
-  color: #555;
   margin: 0 5px 10px;
   display: block;
 }
@@ -51,8 +55,7 @@ label {
   width: 100%;
   padding: 30px;
   border-radius: 12px;
-  background: linear-gradient(145deg, #e0e0e0, #f8f8f8);
-  box-shadow: 8px 8px 16px #c0c0c0, -8px -8px 16px #ffffff;
+  box-shadow: 8px 8px 16px #161b22, -8px -8px 16px #5f646a;
 }
 
 /* Input Fields and Select Styling */
@@ -81,7 +84,6 @@ label {
 
 .role-label {
   font-size: 14px;
-  color: #555;
   margin-bottom: 5px;
   display: block;
 }
@@ -115,10 +117,8 @@ label {
   justify-content: center;
   padding: 12px;
   font-size: 16px;
-  color: #333;
   border: 1px solid #ddd;
   border-radius: 8px;
-  background: #fff;
   cursor: pointer;
   transition: background 0.3s, transform 0.1s;
   font-weight: bold;

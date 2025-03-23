@@ -1,6 +1,8 @@
 .rentals-container {
     width: 80%;
     margin: 0 auto;
+    background-color: #161b22;
+    color: white;
   }
   
   .rental-card {
@@ -8,7 +10,6 @@
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 8px;
-    background-color: #f9f9f9;
   }
   
   button {
