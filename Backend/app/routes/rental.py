@@ -9,6 +9,7 @@ from app.services.s3 import generate_presigned_url
 from bson import ObjectId
 from urllib.parse import urlparse
 import os
+import socket
 
 rental_bp = Blueprint('rentals', __name__)
 
@@ -81,12 +82,21 @@ def extract_text():
     
     allowed_domains = ["mybookrental.s3.amazonaws.com"]
     parsed_url = urlparse(pdf_url)
+
+    if parsed_url.scheme != 'https':
+        return jsonify({'error': 'Only HTTPS URLs are allowed'}), 400
     
-    if parsed_url.netloc not in allowed_domains:
-        return jsonify({'error': 'Domain not allowed'}), 400
+    try:
+        if parsed_url.hostname not in allowed_domains:
+            print(f"Domain {parsed_url.hostname} is not allowed")
+            return jsonify({'error': 'Domain not allowed'}), 400
+    
+    except socket.gaierror:
+        return jsonify({'error': 'Invalid domain'}), 400
     
     response = requests.get(pdf_url)
     #response = requests.get(parsed_url.geturl())
+
     if response.status_code != 200:
         return jsonify({'error': 'Failed to fetch PDF'}), 500
 
