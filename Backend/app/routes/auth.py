@@ -33,7 +33,8 @@ def login_google():
         redirect_uri = url_for('auth.authorize_google', _external=True)
         return google.authorize_redirect(redirect_uri)
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        print(f"Error during Google OAuth login: {e}")
+        return jsonify({"error": "Google OAuth login failed"}), 500
 
 # Google OAuth Callback Route
 @auth_bp.route('/authorize/google')

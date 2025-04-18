@@ -247,4 +247,5 @@ def upload_cover_image():
         file_url = f"https://{bucket_name}.s3.amazonaws.com/{file_key}"
         return jsonify({"url": file_url}), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        print(f"Error uploading to S3: {e}")
+        return jsonify({"error": "Failed to upload file"}), 500

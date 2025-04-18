@@ -31,7 +31,8 @@ def transcribe_audio():
         ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     except subprocess.CalledProcessError as e:
-        return jsonify({"error": f"Audio conversion failed: {str(e)}"}), 500
+        print(f"FFmpeg error: {e}")
+        return jsonify({"error": "Audio conversion failed"}), 500
 
     # Verify if WAV file exists and is valid
     if not os.path.exists(output_path) or os.path.getsize(output_path) == 0:
