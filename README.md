@@ -40,9 +40,7 @@ Rent-a-Read is a secure, cloud-powered eBook rental system designed to make read
 
   
 ## Code Quality with SonarQube (Community Edition) 🔍
-
-This project uses [**SonarQube Community Edition**](https://sonarcloud.io/summary/overall?id=alokverma18_Rent-a-Read&branch=release) for static code analysis.
-
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=alokverma18_Rent-a-Read&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=alokverma18_Rent-a-Read)
 
 ## Snapshots 🖼️
 
