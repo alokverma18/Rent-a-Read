@@ -1,14 +1,14 @@
 import boto3
 def generate_signed_url():
     # Specify the AWS region
-    region_name = 'ap-south-1'  # Replace with your bucket's region
+    region_name = 'ap-southeast-2'  # Replace with your bucket's region
 
     # Initialize the S3 client with the specified region
     s3 = boto3.client('s3',aws_access_key_id='',
     aws_secret_access_key='', region_name=region_name)
     
-    bucket_name = 'mybookrental'
-    object_key = 'books/Reckless'
+    bucket_name = 'rentaread'
+    object_key = 'books/White Nights.pdf'
 
     try:
         # Generate the signed URL with the appropriate signing mechanism

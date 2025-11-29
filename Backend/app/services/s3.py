@@ -7,7 +7,7 @@ s3 = boto3.client(
     's3',
     aws_access_key_id=Config.S3_KEY,
     aws_secret_access_key=Config.S3_SECRET,
-    region_name = 'ap-south-1'
+    region_name = 'ap-southeast-2'
 )
 bucket_name = Config.S3_BUCKET
 
